@@ -32,19 +32,26 @@ void Player::initVariables()
     isJumping = false;
     isOnPlatform = false;
     // Bullets
-    faceDirection = Directions::Right;
+    faceDirection = Directions::Static;
 }
 
 void Player::initPlayer()
 {
     this->initAttributes(20, groundHeight, 50.f, 50.f);
     this->shape.setOrigin(shape.getSize() / 2.0f);
-    this->shape.setFillColor(sf::Color::Green);
+    // this->shape.setFillColor(sf::Color::Green);
+    // this->shape.setOrigin(shape.getSize() / 2.0f);
+    this->shape.setTexture(&texture.playerTexture);
 }
 
 void Player::initObjects()
 {
-    this->animation = new Animation(&texture.playerTexture, sf::Vector2u(2, 5), 1.0f);
+    // Animacion general inicio
+    this->animation = new Animation(getWitdh(), getHeight(), 4, 3);
+    shape.setTextureRect(this->animation->uvRect);
+
+    // creando ciclos de animacion
+    this->createAnimationCycle();
 }
 
 // Functions
@@ -71,10 +78,9 @@ void Player::updateInput()
     float deltaTime = 0.07f;
     sf::Vector2f movement(0.0f, 0.0f);
     float velocityY = 0.0f;
+
     // Keyboard inputs
     handleKeyPressed(velocityY, movement, deltaTime);
-    animation->update(row, deltaTime, faceRight);
-    shape.setTextureRect(this->animation->uvRect);
     velocityY = fabs(velocityY);
 
     if (movementDirection == Directions::Up)
@@ -82,6 +88,8 @@ void Player::updateInput()
 
     velocityY += accelerationY;
     movement.y = velocityY;
+
+    getAction();
     shape.move(movement);
     updateCords();
 }
@@ -125,12 +133,17 @@ void Player::handleKeyPressed(float &velocityY, sf::Vector2f &movement, float de
     }
 }
 
-void Player::update(EntityNode *platforms)
+void Player::update(EntityNode *platforms, float dt)
 {
     updateInput();
     checkCollisionWithPlatforms(platforms);
     gravity();
     windowsCollision();
+
+    // Animacion
+    // std::cout<<"\nEje X:"<<this->animation->uvRect.width;
+    animation->update(animationRow, frameCycles[currentCycle], dt);
+    shape.setTextureRect(this->animation->uvRect);
 }
 
 // Collision Player
@@ -195,7 +208,8 @@ void Player::checkCollisionWithObjects(EntityNode *objects)
             std::cout << "muere" << std::endl;
             return;
         }
-        shape.setFillColor(sf::Color::Green);
+        // shape.setFillColor(sf::Color::Green);
+        shape.setFillColor(sf::Color::White);
         head = head->next_node;
     }
 }
@@ -208,4 +222,90 @@ bool Player::isOnFloor()
 Directions Player::getFaceDirection()
 {
     return faceDirection;
+}
+
+// INCERTAR EN LISTA CIRCULARES
+void Player::createAnimationCycle()
+{
+    int numFrames = 0;
+    int startX;
+
+    for (int frameCount = 0; frameCount < 5; frameCount++)
+    {
+
+        if (frameCount != 2)
+        {
+            numFrames = 3;
+        }
+        else
+            numFrames = 7;
+
+        if (frameCount == 1 || frameCount == 4)
+            startX = 150;
+        else
+            startX = 0;
+
+        // Crea la lista circular a utilizar
+        // Primer frame
+        frameCycles[frameCount] = new Frame();
+        frameCycles[frameCount]->leftX = startX;
+        frameCycles[frameCount]->nextFrame = frameCycles[frameCount];
+
+        // Copias para recorrer... por donde recorres? ლ(ಠ_ಠ ლ)
+        Frame *head = frameCycles[frameCount]; // Cabeza del ciclo
+
+        // Llenando los frames segun numFrames
+        for (int j = 1; j < numFrames; j++)
+        {
+
+            Frame *temp = new Frame();
+            temp->leftX = j * 50 + startX; // se coloca el valor
+
+            temp->nextFrame = frameCycles[frameCount]; // iguala al siguiente de la lista
+            head->nextFrame = temp;
+            head = head->nextFrame;
+            // frameCycles[frameCount]=temp;                       //se incerta el nuevo en la cabecera
+        }
+    }
+}
+
+void Player::getAction()
+{
+    std::cout << "Direction: " << faceDirection << std::endl;
+    if (faceDirection != Directions::Static)
+    {
+
+        if (faceDirection == Directions::Right)
+        {
+            animationRow = runR;
+        }
+        else
+            animationRow = runL;
+        currentCycle = runJump;
+    }
+
+    else if (isJumping)
+    {
+
+        if (faceDirection == Directions::Right)
+        {
+            animationRow = jumpR;
+        }
+        else
+            animationRow = jumpL;
+
+        currentCycle = runJump;
+    }
+
+    else
+    {
+        if (faceDirection == Directions::Right)
+        {
+            currentCycle = iddleR;
+        }
+        else
+            currentCycle = iddleL;
+
+        animationRow = iddleRow;
+    }
 }

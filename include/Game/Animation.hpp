@@ -1,25 +1,24 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include "Frame.hpp"
 
 class Animation
 {
 private:
-    sf::Vector2u imgCount;
-    sf::Vector2u currentImg;
-    float totalTime;
-    float switchTime;
-
     void initVariables();
 
 public:
     // Variables
-    sf::IntRect uvRect;
+    int numSheet;     // cuantas animaciones hay por spriteSheet
+    float switchTime; // second per frame de la animacion
+    float totalTime;
+
+    sf::IntRect uvRect; // Rectangulo que contiene lo mostrado
 
     // Constructor-Destructor
-    Animation(sf::Texture *texture, sf::Vector2u imgCount, float switchTime);
+    Animation(int rectWidth, int rectHeight, int numSheet, float switchTime);
     ~Animation();
 
-    // Functions
-    void update(int row, float deltaTime, bool faceRight);
+    void update(int animationRow, Frame *&frameCycle, float deltaTime);
 };

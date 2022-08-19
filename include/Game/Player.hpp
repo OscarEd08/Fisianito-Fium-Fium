@@ -28,7 +28,6 @@ public:
 private:
     // Objects
     GameTextures texture;
-    Animation *animation;
 
     // Gravity Variables
     int groundHeight;
@@ -47,6 +46,32 @@ private:
 
     Directions faceDirection;
 
+public:
+    // Objects
+    int animationRow;
+    enum animationTop
+    {
+        iddleRow,
+        runR,
+        runL,
+        jumpR,
+        jumpL
+    };
+    enum animationFrame
+    {
+        iddleR,
+        iddleL,
+        runJump,
+        hitR,
+        hitL
+    };
+    Animation *animation;
+    // Animacion actual
+    int currentCycle;
+    // Ciclo de animaciones total
+    Frame **frameCycles = new Frame *[5];
+    void createAnimationCycle();
+
     // Métodos
 private:
     void initVariables();
@@ -60,8 +85,10 @@ private:
 
 public:
     void handleJump();
+    void getAction();
+
     Directions getFaceDirection();
-    void update(EntityNode *platforms);
+    void update(EntityNode *platforms, float dt);
     void checkCollisionWithPlatforms(EntityNode *platforms);
     void windowsCollision();
     void checkCollisionWithObjects(EntityNode *objects);

@@ -1,40 +1,31 @@
 #include "Game/Animation.hpp"
+#include <iostream>
 
-Animation::Animation(sf::Texture *texture, sf::Vector2u imgCount, float switchTime)
+Animation::Animation(int rectWidth, int rectHeight, int numSheet, float switchTime)
 {
-    this->imgCount = imgCount;
+    // Rectangulo visible de Shape
+    sf::IntRect area(0, 0, rectWidth, rectHeight);
+    this->uvRect = area;
+    // Cantidad de animaciones en el SpreadSheet
+    this->numSheet = numSheet;
+    // Frame *animacions[numSheet];
+    // time para la animacion
+    this->totalTime = 0;
     this->switchTime = switchTime;
-    totalTime = 0.0f;
-    currentImg.x = 0;
-    uvRect.width = texture->getSize().x / float(imgCount.x);
-    uvRect.height = texture->getSize().y / float(imgCount.y);
 }
 
 Animation::~Animation() {}
 
-void Animation::update(int row, float deltaTime, bool faceRight)
+void Animation::update(int animationRow, Frame *&frameCycle, float deltaTime)
 {
-    currentImg.y = row;
     totalTime += deltaTime;
-
     if (totalTime >= switchTime)
     {
+
         totalTime -= switchTime;
-        currentImg.x++;
-        if (currentImg.x >= imgCount.x)
-            currentImg.x = 0;
-    }
-
-    uvRect.top = currentImg.y * uvRect.height;
-
-    if (faceRight)
-    {
-        uvRect.left = currentImg.x * uvRect.width;
-        uvRect.width = abs(uvRect.width);
-    }
-    else
-    {
-        uvRect.left = (currentImg.x + 1) * abs(uvRect.width);
-        uvRect.width = -abs(uvRect.width);
+        frameCycle = frameCycle->nextFrame; // cambio de frame
+        // convirtiendo el rectangulo a mostrar
+        this->uvRect.top = animationRow * 50;
+        this->uvRect.left = frameCycle->leftX;
     }
 }

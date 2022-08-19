@@ -66,7 +66,8 @@ void Game::pollEvents()
         {
             if (ev.key.code == sf::Keyboard::F)
                 bulletList.shotBullet(player.getYCord(), player.getXCord(), player.getHeight(), player.getFaceDirection());
-            player.movementDirection = Directions::Down;
+            else
+                player.movementDirection = Directions::Static;
             player.isJumping = false;
             break;
         }
@@ -74,11 +75,11 @@ void Game::pollEvents()
     }
 }
 
-void Game::update()
+void Game::update(float dt)
 {
     pollEvents();
     // initBullets();
-    player.update(map.platforms);
+    player.update(map.platforms, dt);
     enemy.checkCollisionWithPlatforms(map.platforms);
     player.checkCollisionWithObjects(map.objects);
     bulletList.updateBullets();

@@ -20,6 +20,7 @@ add_executable(fisianito
   include/Game/Bullets.hpp
   include/Game/Enemy.hpp
   include/Game/Entity.hpp
+  include/Game/Frame.hpp
   include/Game/Collision.hpp
   include/Game/Game.hpp
   include/Game/GameTextures.hpp

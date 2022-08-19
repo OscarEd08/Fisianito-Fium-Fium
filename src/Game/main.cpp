@@ -18,7 +18,7 @@ int main()
         while (accumulator >= timestep)
         {
             accumulator -= timestep;
-            game.update();
+            game.update(clock.getElapsedTime().asMicroseconds());
         }
 
         // Render
