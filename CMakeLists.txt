@@ -6,7 +6,7 @@ enable_testing()
 IF (WIN32)
 # Windows specific config
   # Include local sfml cmake config
-  set(SFML_DIR "C:/Users/Luu/Downloads/SFML-2.5.1/lib/cmake/SFML")
+  set(SFML_DIR "C:/dev/SFML-2.5.1/lib/cmake/SFML/")
 ENDIF()
 
 find_package(SFML

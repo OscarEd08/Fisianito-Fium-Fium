@@ -39,8 +39,10 @@ void Bullets::renderBullets(sf::RenderTarget *target)
     BulletNode *head = bulletsList;
     while (head)
     {
-        Entity bullet = head->value;
-        bullet.renderOnGame(target);
+        Bullet bullet = head->value;
+        if(!bullet.hasCollide){
+            bullet.renderOnGame(target);
+        }
         head = head->next_node;
     }
 }
