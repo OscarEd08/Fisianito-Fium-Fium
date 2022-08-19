@@ -27,6 +27,8 @@ void Player::initVariables()
     gravitySpeed = 1.0f;
     jumpSpeed = 20.0f;
     accelerationY = 0.0f;
+    live = 100;
+    isAlive = true;
     jumpStatus = Neutral;
     // Status
     isJumping = false;
@@ -130,7 +132,8 @@ void Player::update(EntityNode *platforms, float dt)
     checkCollisionWithPlatforms(platforms);
     gravity();
     windowsCollision();
-
+    std::cout << "Vida del carajito: " << live << std::endl;
+    checkIfCarajitoVive();
     // Animacion
     // std::cout<<"\nEje X:"<<this->animation->uvRect.width;
     animation->update(animationRow, frameCycles[currentCycle], dt);
@@ -197,6 +200,7 @@ void Player::checkCollisionWithObjects(EntityNode *objects)
         {
             shape.setFillColor(sf::Color::Red);
             std::cout << "muere" << std::endl;
+            live -= 1;
             return;
         }
         // shape.setFillColor(sf::Color::Green);
@@ -211,6 +215,8 @@ void Player::checkCollisionWithEnemies(EnemyManager enemies)
     {
         shape.setFillColor(sf::Color::Red);
         std::cout << "muere" << std::endl;
+        live -= 1;
+
         return;
     }
 }
@@ -312,4 +318,10 @@ void Player::getAction()
 bool Player::isFacingRight()
 {
     return faceRight;
+}
+
+void Player::checkIfCarajitoVive()
+{
+    if (live <= 0)
+        isAlive = false;
 }

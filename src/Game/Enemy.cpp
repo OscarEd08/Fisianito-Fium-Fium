@@ -21,7 +21,6 @@ void Enemy::initVariables()
     initPosY = 0 - shape.getGlobalBounds().height;
     // Speed
     moveSpeed = 50.f;
-    std::cout << "Poniendo 30 de vida" << std::endl;
     // Spawn condition
     isSpawn = false;
 }

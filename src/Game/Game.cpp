@@ -76,13 +76,16 @@ void Game::pollEvents()
 
 void Game::update(float dt)
 {
-    pollEvents();
     // initBullets();
-    player.update(map.platforms, dt);
+    if (player.isAlive)
+    {
+        player.update(map.platforms, dt);
+        player.checkCollisionWithObjects(map.objects);
+        player.checkCollisionWithEnemies(enemy);
+    }
+    pollEvents();
     // enemy.checkImpactWithBullets(bulletList.bulletsList);
     //  enemy.checkCollisionWithPlatforms(map.platforms);
-    player.checkCollisionWithObjects(map.objects);
-    player.checkCollisionWithEnemies(enemy);
     bulletList.updateBullets();
     // enemy.update();
     enemy.initEnemies();
@@ -93,9 +96,12 @@ void Game::update(float dt)
 void Game::render()
 {
     window->clear();
+    if (player.isAlive)
+    {
+        player.renderOnGame(this->window);
+        bulletList.renderBullets(this->window);
+    }
     //   Draw game objects
-    player.renderOnGame(this->window);
-    bulletList.renderBullets(this->window);
     // ground.renderOnGame(this->window);
     map.renderPlatforms(this->window);
     map.renderObjects(this->window);

@@ -25,6 +25,8 @@ public:
     // Atributos
 public:
     bool isJumping;
+    int live;
+    bool isAlive;
 
 private:
     // Objects
@@ -80,6 +82,7 @@ private:
     void initPlayer();
     void gravity();
     void updateInput();
+    void checkIfCarajitoVive();
     void handleKeyPressed(float &velocityY, sf::Vector2f &movement, float deltaTime);
     bool isOnFloor();
     void updateBullets();
