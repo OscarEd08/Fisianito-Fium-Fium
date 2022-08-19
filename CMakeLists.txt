@@ -19,6 +19,7 @@ add_executable(fisianito
   include/Game/Bullet.hpp
   include/Game/Bullets.hpp
   include/Game/Enemy.hpp
+  include/Game/EnemyManager.hpp
   include/Game/Entity.hpp
   include/Game/Frame.hpp
   include/Game/Collision.hpp
@@ -34,6 +35,7 @@ add_executable(fisianito
   src/Game/Bullets.cpp
   src/Game/Collision.cpp
   src/Game/Enemy.cpp
+  src/Game/EnemyManager.cpp
   src/Game/Entity.cpp
   src/Game/Game.cpp
   src/Game/GameTextures.cpp

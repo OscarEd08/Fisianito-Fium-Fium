@@ -1,11 +1,14 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "Game/Game.hpp"
+#include <stdlib.h>
+#include <time.h>
 
 int main()
 {
     // Init Game
 
+    srand(time(NULL));
     Game game;
     sf::Clock clock;
     float accumulator = 0;

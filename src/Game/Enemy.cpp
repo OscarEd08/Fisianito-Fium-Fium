@@ -1,11 +1,11 @@
 #include "Game/Enemy.hpp"
-#include <iostream>
+
 // Constructor-Destructor
 Enemy::Enemy()
 {
-    this->initVariables();
-    this->initEnemy();
-    this->initObjects();
+    isSpawn = true;
+    // this->initVariables();
+    // this->initEnemy();
 }
 
 Enemy::~Enemy() {}
@@ -14,17 +14,21 @@ Enemy::~Enemy() {}
 void Enemy::initVariables()
 {
     // Position
-    groundHeight = 100.0f;
+    initPosX = getRandomNumber(0, 1230);
+    initPosY = 0 - shape.getGlobalBounds().height;
     // Speed
     moveSpeed = 50.f;
-    fallSpeed = 10.0f;
-    gravitySpeed = 0.98f;
+    // Spawn condition
+    isSpawn = false;
 }
 
 void Enemy::initEnemy()
 {
-    this->initAttributes(0, groundHeight, 50.f, 50.f);
-    this->shape.setFillColor(sf::Color::Blue);
+    if (isSpawn)
+    {
+        initVariables();
+        this->initAttributes(initPosX, initPosY, 50.f, 50.f);
+    }
 }
 
 void Enemy::moveEnemy()
@@ -37,41 +41,24 @@ void Enemy::moveEnemy()
         moveSpeed *= -1;
     }
 
+    // Fall logic
     if (!isOnPlatform)
     {
         fallSpeed = getRandomNumber(5, 10);
         movement.y += fallSpeed * deltatime;
     }
 
-    if (shape.getPosition().y + shape.getGlobalBounds().height > 670)
-    {
-        movement.y = 0;
-    }
-
+    // Horizontal movement
     movement.x += moveSpeed * deltatime;
-    shape.move(movement);
-    this->updateCords();
-}
 
-void Enemy::initObjects()
-{
-}
-
-void Enemy::gravity()
-{
-    if (getYCord() < groundHeight && !isJumping && !isOnPlatform)
-    {
-        moveEntity(0.f, gravitySpeed);
-    }
+    moveEntity(movement.x, movement.y);
 }
 
 void Enemy::update()
 {
     moveEnemy();
-    gravity();
 }
 
-// Collision Enemy
 void Enemy::checkCollisionWithPlatforms(EntityNode *platforms)
 {
     EntityNode *head = platforms;
@@ -80,9 +67,9 @@ void Enemy::checkCollisionWithPlatforms(EntityNode *platforms)
         if (playerIsOnPlatform(head->value))
         {
             isOnPlatform = true;
-            shape.setFillColor(sf::Color::Cyan);
             return;
         }
+        shape.setFillColor(sf::Color::Cyan);
         head = head->next_node;
     }
     isOnPlatform = false;
@@ -107,18 +94,4 @@ bool Enemy::playerIsOnPlatform(Entity platform)
     if (posX > minusLimitOnX && posX < superiorLimitOnX && epsilonEquals(posY, limitOnY))
         return true;
     return false;
-}
-
-void Enemy::checkImpactWithBullets(BulletNode *bullets)
-{
-    BulletNode *head = bullets;
-    while (head)
-    {
-        if (shape.getGlobalBounds().intersects(head->value.getShape().getGlobalBounds()))
-        {
-            std::cout << "Balaceado por los municipales" << std::endl;
-            head->value.hasCollide = true;
-        }
-        head = head->next_node;
-    }
 }

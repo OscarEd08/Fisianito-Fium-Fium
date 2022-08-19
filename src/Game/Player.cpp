@@ -205,6 +205,15 @@ void Player::checkCollisionWithObjects(EntityNode *objects)
     }
 }
 
+void Player::checkCollisionWithEnemies(EnemyManager enemies)
+{
+    if (shape.getGlobalBounds().intersects(enemies.getBounds()))
+    {
+        shape.setFillColor(sf::Color::Red);
+        std::cout << "muere" << std::endl;
+        return;
+    }
+}
 bool Player::isOnFloor()
 {
     return getYCord() == groundHeight;
@@ -262,7 +271,6 @@ void Player::createAnimationCycle()
 
 void Player::getAction()
 {
-    std::cout << "Direction: " << faceDirection << std::endl;
     if (faceDirection != Directions::Static)
     {
 

@@ -3,6 +3,7 @@
 #include "Player.hpp"
 #include "Platform.hpp"
 #include "Enemy.hpp"
+#include "EnemyManager.hpp"
 #include "Maps.hpp"
 #include "Bullets.hpp"
 #include "DataStructures/EntityNode.hpp"
@@ -24,7 +25,7 @@ private:
 
     // Game objects
     Player player;
-    Enemy enemy;
+    EnemyManager enemy;
     Platform ground;
     Bullets bulletList;
     Maps map;

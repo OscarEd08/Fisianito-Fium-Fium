@@ -1,3 +1,5 @@
+
+
 #pragma once
 
 #include <SFML/Graphics.hpp>
@@ -6,10 +8,10 @@
 #include "GameTextures.hpp"
 #include "Entity.hpp"
 #include "DataStructures/EntityNode.hpp"
-#include "DataStructures/BulletNode.hpp"
 
 class Enemy : public Entity
 {
+
 public:
     // Constructor-Destructor
     Enemy();
@@ -24,22 +26,21 @@ public:
     GameTextures texture;
 
     // Gravity & Speed Variables
-    int groundHeight;
+    float initPosX;
+    float initPosY;
     bool isJumping;
-    float gravitySpeed;
     float moveSpeed;
     float fallSpeed;
+    bool isSpawn;
 
 private:
     bool playerIsOnPlatform(Entity platform);
 
 public:
     void checkCollisionWithPlatforms(EntityNode *platforms);
-    void checkImpactWithBullets(BulletNode *bullets);
     // Functions
     void initEnemy();
     void moveEnemy();
-    void gravity();
     void updateInput();
     void update();
 };

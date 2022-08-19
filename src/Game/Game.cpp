@@ -32,7 +32,6 @@ void Game::initWindow()
 void Game::initEntitys()
 {
     player.initShape();
-    enemy.initShape();
     map.initPlatforms();
     map.initObjects();
     this->ground.initAttributes(0, 670, 1280.0f, 100.0f);
@@ -80,11 +79,14 @@ void Game::update(float dt)
     pollEvents();
     // initBullets();
     player.update(map.platforms, dt);
-    enemy.checkCollisionWithPlatforms(map.platforms);
+    // enemy.checkImpactWithBullets(bulletList.bulletsList);
+    //  enemy.checkCollisionWithPlatforms(map.platforms);
     player.checkCollisionWithObjects(map.objects);
+    player.checkCollisionWithEnemies(enemy);
     bulletList.updateBullets();
-    enemy.checkImpactWithBullets(bulletList.bulletsList);
-    enemy.update();
+    // enemy.update();
+    enemy.initEnemies();
+    enemy.updateManager();
 }
 
 void Game::render()
@@ -93,10 +95,12 @@ void Game::render()
     //   Draw game objects
     player.renderOnGame(this->window);
     bulletList.renderBullets(this->window);
-    ground.renderOnGame(this->window);
+    // ground.renderOnGame(this->window);
     map.renderPlatforms(this->window);
     map.renderObjects(this->window);
-    enemy.renderOnGame(this->window);
+    // enemy.renderOnGame(this->window);
+    enemy.renderEnemies(this->window);
+
     // renderPlatforms();
     window->display();
 }
