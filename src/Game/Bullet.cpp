@@ -2,7 +2,7 @@
 
 Bullet::Bullet()
 {
-    damage = 100;
+    damage = 10;
     hasCollide = false;
 }
 
