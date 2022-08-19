@@ -36,7 +36,7 @@ void Player::initVariables()
 void Player::initObjects()
 {  
     //Animacion general inicio
-    this->animation = new Animation(getWitdh(),getHeight(),4,4);
+    this->animation = new Animation(getWitdh(),getHeight(),4,3);
     shape.setTextureRect(this->animation->uvRect);
     
     //creando ciclos de animacion
@@ -161,65 +161,16 @@ void Player::createAnimationCycle()
         // Llenando los frames segun numFrames
         for (int j = 1; j < numFrames; j++)
         {
-            head = head->nextFrame;
 
             Frame *temp = new Frame();
             temp->leftX = j*50 + startX;        // se coloca el valor
 
-            head->nextFrame=temp;
             temp->nextFrame=frameCycles[frameCount];               //iguala al siguiente de la lista
-            //frameCycles[frameCount]=temp;                          //se incerta el nuevo en la cabecera
+            head->nextFrame=temp;
+            head = head->nextFrame;
+            //frameCycles[frameCount]=temp;                       //se incerta el nuevo en la cabecera
         }
-     
-        //VERIFICANDO
-        std::cout<<"\n\nCiclo"<<frameCount<<": "<<frameCycles[frameCount]->leftX;
-        std::cout<<"\nCiclo"<<frameCount<<": "<<frameCycles[frameCount]->nextFrame->leftX;
-        std::cout<<"\nCiclo"<<frameCount<<": "<<frameCycles[frameCount]->nextFrame->nextFrame->leftX;
-        std::cout<<"\nCiclo"<<frameCount<<": "<<frameCycles[frameCount]->nextFrame->nextFrame->nextFrame->nextFrame->leftX;
-        std::cout<<"\nCiclo"<<frameCount<<": "<<frameCycles[frameCount]->nextFrame->nextFrame->nextFrame->nextFrame->nextFrame->leftX;
-        std::cout<<"\nCiclo"<<frameCount<<": "<<frameCycles[frameCount]->nextFrame->nextFrame->nextFrame->nextFrame->nextFrame->nextFrame->leftX;
-        std::cout<<"\nCiclo"<<frameCount<<": "<<frameCycles[frameCount]->nextFrame->nextFrame->nextFrame->nextFrame->nextFrame->nextFrame->nextFrame->leftX;
-        std::cout<<"\nCiclo"<<frameCount<<": "<<frameCycles[frameCount]->nextFrame->nextFrame->nextFrame->nextFrame->nextFrame->nextFrame->nextFrame->nextFrame->leftX;
 
     }
 }
 
-/*void Player::createAnimationCycle(){
-    int numFrames;
-    int startX;
-    for(int i=0; i<5;i++){
-
-        if(i!=2){
-            numFrames=3;
-        }
-        else numFrames=7;
-
-        if(i==1 || i==4) startX=150;
-        else startX=0;
-
-        //Crea la lista circular a utilizar
-        frameCycles[i]=NULL;
-        Frame *head=new Frame();
-        //head->nextFrame=head;
-
-        for(int j=0;j<numFrames;j++){
-            head->leftX=j*50 +startX;//se designa las coordenadas
-            frameCycles[i]=head;
-            
-            frameCycles[i]=frameCycles[i]->nextFrame;
-            
-            if(head->nextFrame!=NULL)
-            {
-                head->nextFrame=head;
-                head=head->nextFrame;
-            }
-        }
-        head->nextFrame=frameCycles[i];
-        frameCycles[i]->nextFrame=head;
-        //VERIFICANDO
-        std::cout<<"\nCiclo"<<i<<": "<<frameCycles[i]->leftX;
-        std::cout<<"\nCiclo"<<i<<": "<<frameCycles[i]->nextFrame->leftX;
-        std::cout<<"\nCiclo"<<i<<": "<<frameCycles[i]->nextFrame->nextFrame->leftX;
-        std::cout<<"\nCiclo"<<i<<": "<<frameCycles[i]->nextFrame->nextFrame->nextFrame->leftX;
-    }
-}*/
