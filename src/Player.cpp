@@ -36,7 +36,7 @@ void Player::initVariables()
 void Player::initObjects()
 {  
     //Animacion general inicio
-    this->animation = new Animation(getWitdh(),getHeight(),4,1.5);
+    this->animation = new Animation(getWitdh(),getHeight(),4,4);
     shape.setTextureRect(this->animation->uvRect);
     
     //creando ciclos de animacion
@@ -136,7 +136,7 @@ void Player::update(float dt)
 //INCERTAR EN LISTA CIRCULARES
 void Player::createAnimationCycle()
 {
-    int numFrames;
+    int numFrames=0;
     int startX;
 
     for(int frameCount=0; frameCount<5;frameCount++){
@@ -157,21 +157,29 @@ void Player::createAnimationCycle()
 
         // Copias para recorrer... por donde recorres? ლ(ಠ_ಠ ლ)
         Frame *head=frameCycles[frameCount]; // Cabeza del ciclo
-        
+
         // Llenando los frames segun numFrames
         for (int j = 1; j < numFrames; j++)
         {
-            head = frameCycles[frameCount];
             head = head->nextFrame;
+
             Frame *temp = new Frame();
             temp->leftX = j*50 + startX;        // se coloca el valor
-            temp->nextFrame=head->nextFrame;    //iguala al siguiente de la lista
-            head->nextFrame=temp;               //se incerta el nuevo en la cabecera
 
-            frameCycles[frameCount]=head;
-            
-        
+            head->nextFrame=temp;
+            temp->nextFrame=frameCycles[frameCount];               //iguala al siguiente de la lista
+            //frameCycles[frameCount]=temp;                          //se incerta el nuevo en la cabecera
         }
+     
+        //VERIFICANDO
+        std::cout<<"\n\nCiclo"<<frameCount<<": "<<frameCycles[frameCount]->leftX;
+        std::cout<<"\nCiclo"<<frameCount<<": "<<frameCycles[frameCount]->nextFrame->leftX;
+        std::cout<<"\nCiclo"<<frameCount<<": "<<frameCycles[frameCount]->nextFrame->nextFrame->leftX;
+        std::cout<<"\nCiclo"<<frameCount<<": "<<frameCycles[frameCount]->nextFrame->nextFrame->nextFrame->nextFrame->leftX;
+        std::cout<<"\nCiclo"<<frameCount<<": "<<frameCycles[frameCount]->nextFrame->nextFrame->nextFrame->nextFrame->nextFrame->leftX;
+        std::cout<<"\nCiclo"<<frameCount<<": "<<frameCycles[frameCount]->nextFrame->nextFrame->nextFrame->nextFrame->nextFrame->nextFrame->leftX;
+        std::cout<<"\nCiclo"<<frameCount<<": "<<frameCycles[frameCount]->nextFrame->nextFrame->nextFrame->nextFrame->nextFrame->nextFrame->nextFrame->leftX;
+        std::cout<<"\nCiclo"<<frameCount<<": "<<frameCycles[frameCount]->nextFrame->nextFrame->nextFrame->nextFrame->nextFrame->nextFrame->nextFrame->nextFrame->leftX;
 
     }
 }
