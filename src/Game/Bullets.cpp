@@ -29,7 +29,6 @@ void Bullets::shotBullet(float playerYCord, float playerXCord, float playerHeigh
     }
     head->next_node = new BulletNode();
     head->next_node->value = newBullet;
-    head->next_node->value.logEntity();
 }
 
 void Bullets::renderBullets(sf::RenderTarget *target)
@@ -43,12 +42,47 @@ void Bullets::renderBullets(sf::RenderTarget *target)
     }
 }
 
-void Bullets::updateBullet()
+void Bullets::updateBullets()
 {
     BulletNode *head = bulletsList;
+    int cont = 0;
     while (head)
     {
         head->value.updateBullet();
+        head = head->next_node;
+        cont++;
+    }
+    // std::cout << "Number of bullets: " << cont << std::endl;
+    deleteBulletsFromList();
+}
+
+void Bullets::deleteBulletsFromList()
+{
+    if (!bulletsList)
+    {
+        return;
+    }
+
+    // If head bullet has colide
+    if (bulletsList->value.hasCollide)
+    {
+        bulletsList = bulletsList->next_node;
+    }
+    BulletNode *head = bulletsList;
+
+    while (head)
+    {
+
+        Bullet currentBullet = head->value;
+        if (currentBullet.hasCollide)
+        {
+            if (head->next_node)
+            {
+
+                head = head->next_node;
+            }
+        }
+
         head = head->next_node;
     }
 }

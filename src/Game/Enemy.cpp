@@ -1,5 +1,5 @@
 #include "Game/Enemy.hpp"
-
+#include <iostream>
 // Constructor-Destructor
 Enemy::Enemy()
 {
@@ -107,4 +107,18 @@ bool Enemy::playerIsOnPlatform(Entity platform)
     if (posX > minusLimitOnX && posX < superiorLimitOnX && epsilonEquals(posY, limitOnY))
         return true;
     return false;
+}
+
+void Enemy::checkImpactWithBullets(BulletNode *bullets)
+{
+    BulletNode *head = bullets;
+    while (head)
+    {
+        if (shape.getGlobalBounds().intersects(head->value.getShape().getGlobalBounds()))
+        {
+            std::cout << "Balaceado por los municipales" << std::endl;
+            head->value.hasCollide = true;
+        }
+        head = head->next_node;
+    }
 }

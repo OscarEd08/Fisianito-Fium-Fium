@@ -81,7 +81,8 @@ void Game::update()
     player.update(map.platforms);
     enemy.checkCollisionWithPlatforms(map.platforms);
     player.checkCollisionWithObjects(map.objects);
-    bulletList.updateBullet();
+    bulletList.updateBullets();
+    enemy.checkImpactWithBullets(bulletList.bulletsList);
     enemy.update();
 }
 

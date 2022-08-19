@@ -6,6 +6,7 @@
 #include "GameTextures.hpp"
 #include "Entity.hpp"
 #include "DataStructures/EntityNode.hpp"
+#include "DataStructures/BulletNode.hpp"
 
 class Enemy : public Entity
 {
@@ -34,6 +35,7 @@ private:
 
 public:
     void checkCollisionWithPlatforms(EntityNode *platforms);
+    void checkImpactWithBullets(BulletNode *bullets);
     // Functions
     void initEnemy();
     void moveEnemy();

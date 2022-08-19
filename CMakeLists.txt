@@ -18,15 +18,16 @@ add_executable(fisianito
   include/Game/Animation.hpp
   include/Game/Bullet.hpp
   include/Game/Bullets.hpp
-  include/Game/Collision.hpp
   include/Game/Enemy.hpp
   include/Game/Entity.hpp
+  include/Game/Collision.hpp
   include/Game/Game.hpp
   include/Game/GameTextures.hpp
   include/Game/Maps.hpp
   include/Game/Platform.hpp
   include/Game/Player.hpp
   include/DataStructures/EntityNode.hpp
+  include/DataStructures/BulletNode.hpp         
   src/Game/Animation.cpp
   src/Game/Bullet.cpp
   src/Game/Bullets.cpp
