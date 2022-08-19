@@ -15,8 +15,8 @@ void Enemy::initVariables()
 {
     // Position
     initPosX = getRandomNumber(0,1230);
-    std::cout<<initPosX<<std::endl;
     initPosY = 0 - shape.getGlobalBounds().height;
+    std::cout<<initPosX<<std::endl;
     // Speed
     moveSpeed = 50.f;
     //Spawn condition
@@ -29,7 +29,6 @@ void Enemy::initEnemy()
         initVariables();
         this->initAttributes(initPosX,initPosY, 50.f, 50.f);
     }
-    
 }
 
 void Enemy::moveEnemy()
