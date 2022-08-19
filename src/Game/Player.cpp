@@ -120,6 +120,16 @@ void Player::windowsCollision()
         shape.setPosition(1280.0f - shape.getGlobalBounds().width, shape.getPosition().y);
 }
 
+void Player::checkCollisionWithEnemies(EnemyManager enemies){
+    if (shape.getGlobalBounds().intersects(enemies.getBounds()))
+    {
+        shape.setFillColor(sf::Color::Red);
+        std::cout << "muere" << std::endl;
+        return;
+    }
+}
+
+
 void Player::checkCollisionWithPlatforms(EntityNode *platforms)
 {
     EntityNode *head = platforms;

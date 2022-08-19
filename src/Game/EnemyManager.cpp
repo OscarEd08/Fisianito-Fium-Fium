@@ -39,3 +39,8 @@ void EnemyManager::renderEnemies(sf::RenderTarget *target){
         i.renderOnGame(target);
     }
 }
+
+sf::FloatRect EnemyManager::getBounds(){
+    for(auto i:enemies)
+        return i.getShape().getGlobalBounds();
+}

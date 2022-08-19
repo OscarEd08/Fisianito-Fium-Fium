@@ -59,7 +59,6 @@ void Enemy::update()
     moveEnemy();
 }
 
-// Collision Enemy
 void Enemy::checkCollisionWithPlatforms(EntityNode *platforms)
 {
     EntityNode *head = platforms;

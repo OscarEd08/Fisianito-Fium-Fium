@@ -5,6 +5,7 @@
 #include "Collision.hpp"
 #include "GameTextures.hpp"
 #include "Entity.hpp"
+#include "EnemyManager.hpp"
 #include "DataStructures/EntityNode.hpp"
 
 enum JumpStatus
@@ -57,4 +58,5 @@ public:
     void checkCollisionWithPlatforms(EntityNode *platforms);
     void windowsCollision();
     void checkCollisionWithObjects(EntityNode *objects);
+    void checkCollisionWithEnemies(EnemyManager enemies);
 };

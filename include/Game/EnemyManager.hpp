@@ -20,6 +20,7 @@ class EnemyManager
     private:
         void initVariables();
     public:
+        sf::FloatRect getBounds();
         void initEnemies();
         void updateManager();
         void renderEnemies(sf::RenderTarget *target);
