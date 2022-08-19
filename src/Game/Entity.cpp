@@ -65,6 +65,7 @@ CollisionDirection Entity::checkCollision(Entity entity)
     float distanceBetweenEntitys = posY - entity.getYCord();
     if (shape.getGlobalBounds().intersects(entity.getShape().getGlobalBounds()))
     {
+        float offset = entity.getYCord() - posY + height;
         if (distanceBetweenEntitys < 0)
         {
             shape.setPosition(posX, entity.getYCord() - height);

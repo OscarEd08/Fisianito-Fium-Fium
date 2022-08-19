@@ -1,32 +1,21 @@
 #include "Game/Bullets.hpp"
 #include <iostream>
-void Bullets::shotBullet(Player player)
+void Bullets::shotBullet(float playerYCord, float playerXCord, float playerHeight, Directions playerDirection)
 {
-    std::cout << "Fire fire piu piu piu " << std::endl;
-    float bulletYPos = player.getYCord();
-    float bulletXPos = player.getXCord();
-    float playerHeight = player.getHeight();
-    bulletYPos += playerHeight / 3.0f;
-    Directions bulletDirection;
-    if (player.isFacingRight())
+    float bulletYPos = playerYCord;
+    float bulletXPos = playerXCord;
+    if (playerDirection == Directions::Left)
     {
-        bulletXPos += playerHeight;
-        bulletDirection = Directions::Right;
+        bulletXPos -= playerHeight + 5.0f;
     }
     else
     {
-        bulletXPos -= playerHeight;
-        bulletDirection = Directions::Left;
-    }
-    if (player.getFaceDirection() == Directions::Up)
-    {
-        std::cout << "Disparando pa arriba" << std::endl;
-        bulletDirection = Directions::Up;
+        bulletXPos += playerHeight + 5.0f;
     }
     Bullet newBullet;
-    newBullet.initAttributes(bulletXPos, bulletYPos, 10.0f, 10.0f);
+    newBullet.initAttributes(bulletXPos, bulletYPos, 25.0f, 25.0f);
     newBullet.initShape();
-    newBullet.setBulletDirection(bulletDirection);
+    newBullet.setBulletDirection(playerDirection);
     if (!bulletsList)
     {
         bulletsList = new BulletNode();
