@@ -1,9 +1,10 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
-#include "Enemy.hpp"
-#include "Maps.hpp"
 #include <vector>
+#include "Enemy.hpp"
+#include "Player.hpp"
+#include "Maps.hpp"
 
 class EnemyManager
 {
@@ -20,7 +21,7 @@ class EnemyManager
     private:
         void initVariables();
     public:
-        sf::FloatRect getBounds();
+        void checkCollisionWithPlayer(Player player);
         void initEnemies();
         void updateManager();
         void renderEnemies(sf::RenderTarget *target);

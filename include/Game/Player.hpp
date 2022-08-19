@@ -58,5 +58,4 @@ public:
     void checkCollisionWithPlatforms(EntityNode *platforms);
     void windowsCollision();
     void checkCollisionWithObjects(EntityNode *objects);
-    void checkCollisionWithEnemies(EnemyManager enemies);
 };

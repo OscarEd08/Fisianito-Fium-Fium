@@ -76,10 +76,11 @@ void Game::update()
     //Player
     player.update(map.platforms);
     player.checkCollisionWithObjects(map.objects);
-    player.checkCollisionWithEnemies(enemy);
+    //player.checkCollisionWithEnemies(enemy);
     //Enemy
     enemy.initEnemies();
     enemy.updateManager();
+    enemy.checkCollisionWithPlayer(player);
 }
 
 void Game::render()

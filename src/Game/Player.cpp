@@ -38,7 +38,7 @@ void Player::initPlayer()
 
 void Player::initObjects()
 {
-    this->animation = new Animation(&texture.playerTexture, sf::Vector2u(2, 5), 1.0f);
+    //this->animation = new Animation(&texture.playerTexture, sf::Vector2u(2, 5), 1.0f);
 }
 
 // Functions
@@ -118,15 +118,6 @@ void Player::windowsCollision()
     // RIght collision
     if (shape.getPosition().x + shape.getGlobalBounds().width > 1280.0f)
         shape.setPosition(1280.0f - shape.getGlobalBounds().width, shape.getPosition().y);
-}
-
-void Player::checkCollisionWithEnemies(EnemyManager enemies){
-    if (shape.getGlobalBounds().intersects(enemies.getBounds()))
-    {
-        shape.setFillColor(sf::Color::Red);
-        std::cout << "muere" << std::endl;
-        return;
-    }
 }
 
 

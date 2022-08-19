@@ -40,7 +40,11 @@ void EnemyManager::renderEnemies(sf::RenderTarget *target){
     }
 }
 
-sf::FloatRect EnemyManager::getBounds(){
-    for(auto i:enemies)
-        return i.getShape().getGlobalBounds();
+void EnemyManager::checkCollisionWithPlayer(Player player){
+    for(int i=0; i<enemies.size(); i++){
+        if(player.getShape().getGlobalBounds().intersects(enemies[i].getShape().getGlobalBounds()))
+        {
+            std::cout<<"me tan balaceando"<<std::endl;
+        }
+    }
 }
