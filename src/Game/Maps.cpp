@@ -17,7 +17,7 @@ void Maps::initVariables()
     this->baseY = 150;
     this->screenWidth = 1280;
     this->heightPlatform = 30.0f;
-    this->heightObject = 20.0f;
+    this->heightObject = 30.0f;
 }
 
 //BackGround
