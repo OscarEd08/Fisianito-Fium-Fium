@@ -85,7 +85,7 @@ CollisionDirection Entity::checkCollision(Entity entity)
 
 int Entity::getRandomNumber(int a, int b)
 {
-    srand(time(NULL));
+    // srand(time(NULL));
     int num;
     num = a + rand() % (b + 1 - a);
     return num;

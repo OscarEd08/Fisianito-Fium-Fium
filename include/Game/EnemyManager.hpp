@@ -25,6 +25,7 @@ private:
 public:
     sf::FloatRect getBounds();
     void initEnemies();
-    void updateManager();
+    void updateManager(BulletNode *bullets);
+    void removeDeadEnemies();
     void renderEnemies(sf::RenderTarget *target);
 };

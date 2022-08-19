@@ -86,7 +86,8 @@ void Game::update(float dt)
     bulletList.updateBullets();
     // enemy.update();
     enemy.initEnemies();
-    enemy.updateManager();
+    enemy.updateManager(bulletList.bulletsList);
+    enemy.removeDeadEnemies();
 }
 
 void Game::render()

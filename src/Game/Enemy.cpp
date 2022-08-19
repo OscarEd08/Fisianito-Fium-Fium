@@ -1,9 +1,12 @@
 #include "Game/Enemy.hpp"
-
+#include <iostream>
 // Constructor-Destructor
 Enemy::Enemy()
 {
     isSpawn = true;
+    live = 30;
+    isAlive = true;
+
     // this->initVariables();
     // this->initEnemy();
 }
@@ -18,6 +21,7 @@ void Enemy::initVariables()
     initPosY = 0 - shape.getGlobalBounds().height;
     // Speed
     moveSpeed = 50.f;
+    std::cout << "Poniendo 30 de vida" << std::endl;
     // Spawn condition
     isSpawn = false;
 }
@@ -94,4 +98,27 @@ bool Enemy::playerIsOnPlatform(Entity platform)
     if (posX > minusLimitOnX && posX < superiorLimitOnX && epsilonEquals(posY, limitOnY))
         return true;
     return false;
+}
+
+void Enemy::checkImpactWithBullets(BulletNode *bullets)
+{
+    BulletNode *head = bullets;
+    while (head)
+    {
+        if (shape.getGlobalBounds().intersects(head->value.getShape().getGlobalBounds()))
+        {
+            std::cout << "Balaceado por los municipales" << std::endl;
+            head->value.hasCollide = true;
+            live -= head->value.damage;
+            std::cout << "Live of enemy: " << live << std::endl;
+            checkIfIsAlive();
+        }
+        head = head->next_node;
+    }
+}
+
+void Enemy::checkIfIsAlive()
+{
+    if (live <= 0)
+        isAlive = false;
 }

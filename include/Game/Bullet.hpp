@@ -2,12 +2,12 @@
 #include "Entity.hpp"
 class Bullet : public Entity
 {
-    int damage;
     float directionX;
     float directionY;
     void checkCollisionWithBorders();
 
 public:
+    int damage;
     bool hasCollide;
     void setBulletDirection(Directions direction);
     void updateBullet();

@@ -1,5 +1,5 @@
 #include "Game/EnemyManager.hpp"
-
+#include <iostream>
 EnemyManager::EnemyManager()
 {
     initVariables();
@@ -12,7 +12,7 @@ void EnemyManager::initVariables()
     maxEnemies = 10;
 }
 
-void EnemyManager::updateManager()
+void EnemyManager::updateManager(BulletNode *bullets)
 {
 
     if (spawnTimer < spawnTimerMax)
@@ -25,10 +25,12 @@ void EnemyManager::updateManager()
             spawnTimer = 0.0f;
         }
     }
+
     for (int i = 0; i < enemies.size(); i++)
     {
         enemies[i].update();
         enemies[i].checkCollisionWithPlatforms(map.platforms);
+        enemies[i].checkImpactWithBullets(bullets);
     }
 }
 
@@ -46,6 +48,24 @@ void EnemyManager::renderEnemies(sf::RenderTarget *target)
     for (auto i : enemies)
     {
         i.renderOnGame(target);
+    }
+}
+
+void EnemyManager::removeDeadEnemies()
+{
+    std::vector<int> indexToRemove;
+    for (int i = 0; i < enemies.size(); i++)
+    {
+        if (!enemies[i].isAlive)
+        {
+            std::cout << "Ta muerto" << std::endl;
+            indexToRemove.push_back(i);
+        }
+    }
+    for (int index : indexToRemove)
+    {
+        std::cout << "Borrando pa la wea" << std::endl;
+        enemies.erase(enemies.begin() + index);
     }
 }
 
