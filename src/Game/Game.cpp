@@ -65,7 +65,7 @@ void Game::pollEvents()
         case sf::Event::KeyReleased:
         {
             if (ev.key.code == sf::Keyboard::F)
-                bulletList.shotBullet(player.getYCord(), player.getXCord(), player.getHeight(), player.getFaceDirection());
+                bulletList.shotBullet(player);
             else
                 player.movementDirection = Directions::Static;
             player.isJumping = false;

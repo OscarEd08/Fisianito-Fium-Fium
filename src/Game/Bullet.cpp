@@ -21,11 +21,16 @@ void Bullet::setBulletDirection(Directions direction)
 
         break;
     }
-
-    default:
+    case Directions::Up:
+    {
+        directionY = -5.0f;
         break;
     }
-    directionY = 0.0f;
+
+    default:
+        directionY = 0.0f;
+        break;
+    }
 }
 void Bullet::checkCollisionWithBorders()
 { // Left collision

@@ -47,7 +47,7 @@ void Player::initPlayer()
 void Player::initObjects()
 {
     // Animacion general inicio
-    this->animation = new Animation(getWitdh(), getHeight(), 4, 3);
+    this->animation = new Animation(getWitdh(), getHeight(), 4, 5);
     shape.setTextureRect(this->animation->uvRect);
 
     // creando ciclos de animacion
@@ -96,41 +96,42 @@ void Player::updateInput()
 
 void Player::handleKeyPressed(float &velocityY, sf::Vector2f &movement, float deltaTime)
 {
+    bool playerMoved = false;
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && movementDirection != Directions::Down)
     {
+
         // salta carajito
         velocityY -= jumpSpeed;
         movementDirection = Directions::Up;
         isJumping = true;
+        playerMoved = true;
     }
 
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl) && isJumping)
+    {
+        faceDirection = Directions::Up;
+        isJumping = false;
+        velocityY += jumpSpeed;
+        std::cout << "Mirando pa arriba" << std::endl;
+    }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
     {
         faceDirection = Directions::Left;
+        movementDirection = Directions::Left;
         movement.x -= moveSpeed * deltaTime;
+        faceRight = false;
+        playerMoved = true;
     }
-    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
     {
         faceDirection = Directions::Right;
+        movementDirection = Directions::Right;
         movement.x += moveSpeed * deltaTime;
+        faceRight = true;
+        playerMoved = true;
     }
-
-    if (movement.x == 0.0f)
-    {
-        row = 0;
-    }
-    else
-    {
-        row = 1;
-        if (movement.x > 0.0f)
-        {
-            faceRight = true;
-        }
-        else
-        {
-            faceRight = false;
-        }
-    }
+    if (!playerMoved)
+        faceDirection = Directions::Static;
 }
 
 void Player::update(EntityNode *platforms, float dt)
@@ -271,11 +272,10 @@ void Player::createAnimationCycle()
 
 void Player::getAction()
 {
-    std::cout << "Direction: " << faceDirection << std::endl;
     if (faceDirection != Directions::Static)
     {
 
-        if (faceDirection == Directions::Right)
+        if (faceRight)
         {
             animationRow = runR;
         }
@@ -299,7 +299,7 @@ void Player::getAction()
 
     else
     {
-        if (faceDirection == Directions::Right)
+        if (faceRight)
         {
             currentCycle = iddleR;
         }
@@ -308,4 +308,9 @@ void Player::getAction()
 
         animationRow = iddleRow;
     }
+}
+
+bool Player::isFacingRight()
+{
+    return faceRight;
 }
