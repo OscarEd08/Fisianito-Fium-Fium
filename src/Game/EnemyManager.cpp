@@ -5,12 +5,13 @@ EnemyManager::EnemyManager(){
 }
 
 void EnemyManager::initVariables(){
-    spawnTimerMax = 10.0f;
+    spawnTimerMax = 300.0f;
     spawnTimer = spawnTimerMax;
-    maxEnemies = 20;
+    maxEnemies = 5;
 }
 
 void EnemyManager::updateManager(){
+    
     if(spawnTimer < spawnTimerMax)
         spawnTimer += 1.0f;
     else{
@@ -19,11 +20,29 @@ void EnemyManager::updateManager(){
             spawnTimer = 0.0f;
         }
     }
+    for (int i = 0; i < enemies.size(); i++)
+        {
+            enemies[i].update();
+            enemies[i].checkCollisionWithPlatforms(map.platforms);
+        }
+    /*
+    if (enemies.size() < maxEnemies){
+        for (int i = 0; i < (maxEnemies-1) - enemies.size(); i++){
+                enemies.push_back(Enemy());
+            }
+    }
+        for (int i = 0; i < enemies.size(); i++)
+        {
+            enemies[i].update();
+            enemies[i].checkCollisionWithPlatforms(map.platforms);
+        }
+        */
 }
 
 void EnemyManager::initEnemies(){
-    for(auto i: enemies){
-        i.initShape();
+    for(int i = 0; i < enemies.size(); i++){
+        enemies[i].initEnemy();
+        enemies[i].initShape();
     }
 }
 

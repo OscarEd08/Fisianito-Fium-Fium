@@ -3,8 +3,9 @@
 // Constructor-Destructor
 Enemy::Enemy()
 {
-    this->initVariables();
-    this->initEnemy();
+    isSpawn = true;
+    //this->initVariables();
+    //this->initEnemy();
 }
 
 Enemy::~Enemy() {}
@@ -14,17 +15,20 @@ void Enemy::initVariables()
 {
     // Position
     initPosX = getRandomNumber(0,1230);
-    initPosY = 0 - shape.getGlobalBounds().width;
-    groundHeight = 100.0f;
+    std::cout<<initPosX<<std::endl;
+    initPosY = 0 - shape.getGlobalBounds().height;
     // Speed
     moveSpeed = 50.f;
-    fallSpeed = 10.0f;
-    gravitySpeed = 0.98f;
+    //Spawn condition
+    isSpawn = false;
 }
 
 void Enemy::initEnemy()
 {
-    this->initAttributes(initPosX,initPosY, 50.f, 50.f);
+    if(isSpawn){
+        initVariables();
+        this->initAttributes(initPosX,initPosY, 50.f, 50.f);
+    }
     
 }
 
@@ -38,28 +42,22 @@ void Enemy::moveEnemy()
         moveSpeed *= -1;
     }
 
+    //Fall logic
     if (!isOnPlatform)
     {
         fallSpeed = getRandomNumber(5, 10);
         movement.y += fallSpeed * deltatime;
     }
 
+    //Horizontal movement
     movement.x += moveSpeed * deltatime;
-    moveEntity(movement.x,movement.y);
-}
 
-void Enemy::gravity()
-{
-    if (getYCord() < groundHeight && !isJumping && !isOnPlatform)
-    {
-        moveEntity(0.f, gravitySpeed);
-    }
+    moveEntity(movement.x,movement.y);
 }
 
 void Enemy::update()
 {
     moveEnemy();
-    gravity();
 }
 
 // Collision Enemy

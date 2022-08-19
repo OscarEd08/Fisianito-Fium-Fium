@@ -1,7 +1,7 @@
 #include "Game/Game.hpp"
 
 // Constructor-Destructor
-Game::Game() : view(sf::Vector2f(0.0f, 0.0f), sf::Vector2f(1600.0f, 800.0f))
+Game::Game() 
 {
     initVariables();
     initEntitys();
@@ -33,8 +33,6 @@ void Game::initWindow()
 void Game::initEntitys()
 {
     player.initShape();
-    //enemy.initShape();
-    enemy.initEnemies();
     map.initPlatforms();
     map.initObjects();
 }
@@ -75,9 +73,12 @@ void Game::pollEvents()
 void Game::update()
 {
     pollEvents();
+    //Player
     player.update(map.platforms);
-    enemy.updateManager();
     player.checkCollisionWithObjects(map.objects);
+    //Enemy
+    enemy.initEnemies();
+    enemy.updateManager();
 }
 
 void Game::render()

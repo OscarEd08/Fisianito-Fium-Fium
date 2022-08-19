@@ -27,11 +27,10 @@ public:
     // Gravity & Speed Variables
     float initPosX;
     float initPosY;
-    int groundHeight;
     bool isJumping;
-    float gravitySpeed;
     float moveSpeed;
     float fallSpeed;
+    bool isSpawn;
 
 private:
     bool playerIsOnPlatform(Entity platform);
@@ -41,7 +40,6 @@ public:
     // Functions
     void initEnemy();
     void moveEnemy();
-    void gravity();
     void updateInput();
     void update();
 };

@@ -2,6 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "Enemy.hpp"
+#include "Maps.hpp"
 #include <vector>
 
 class EnemyManager
@@ -12,6 +13,7 @@ class EnemyManager
         EnemyManager();
     private:
         std::vector<Enemy> enemies;
+        Maps map;
         float spawnTimerMax;
         float spawnTimer;
         float maxEnemies;
