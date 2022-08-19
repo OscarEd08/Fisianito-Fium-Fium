@@ -17,8 +17,8 @@ Game::~Game()
 void Game::initVariables()
 {
     this->window = nullptr;
-    videoMode.width = 1600;
-    videoMode.height = 800;
+    videoMode.width = 1280;
+    videoMode.height = 720;
     deltaTime = 0.0f;
     initObjects();
 }

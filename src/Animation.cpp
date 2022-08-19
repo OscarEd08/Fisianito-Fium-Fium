@@ -22,8 +22,6 @@ void Animation::update(int animationRow, Frame* &frameCycle, float deltaTime)
 {   
     totalTime += deltaTime;
     if (totalTime>=switchTime){
-
-        std::cout<<"\nCiclo actual :"<<frameCycle->leftX;
         totalTime-=switchTime;
         frameCycle=frameCycle->nextFrame; //cambio de frame
         //convirtiendo el rectangulo a mostrar

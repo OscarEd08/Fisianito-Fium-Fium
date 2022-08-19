@@ -6,6 +6,8 @@ class GameTextures
 {
 public:
     sf::Texture playerTexture;
+    sf::Texture menuTexture;
 
+    sf::Font menuFont;
     GameTextures();
 };
