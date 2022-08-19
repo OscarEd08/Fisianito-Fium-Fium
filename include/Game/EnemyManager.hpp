@@ -2,6 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "Enemy.hpp"
+#include "GameTextures.hpp"
 #include "Maps.hpp"
 #include <vector>
 
@@ -23,6 +24,7 @@ private:
     void initVariables();
 
 public:
+    GameTextures texture;
     sf::FloatRect getBounds();
     void initEnemies();
     void updateManager(BulletNode *bullets);

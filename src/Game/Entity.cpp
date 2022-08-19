@@ -18,6 +18,10 @@ void Entity::initShape()
     shape.setSize(sf::Vector2f(width, height));
 }
 
+void Entity::initTexture(sf::Texture &texture){
+    shape.setTexture(&texture);
+}
+
 float Entity::getXCord()
 {
     return shape.getPosition().x;

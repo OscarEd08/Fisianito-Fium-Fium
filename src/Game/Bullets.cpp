@@ -18,6 +18,7 @@ void Bullets::shotBullet(Player player)
     Bullet newBullet;
     newBullet.initAttributes(bulletXPos, bulletYPos, 25.0f, 25.0f);
     newBullet.initShape();
+    newBullet.initTexture(texture.bulletTexture);
     newBullet.setBulletDirection(bulletDirection);
     if (!bulletsList)
     {

@@ -40,6 +40,7 @@ void EnemyManager::initEnemies()
     {
         enemies[i].initEnemy();
         enemies[i].initShape();
+        enemies[i].initTexture(texture.ghostTexture);
     }
 }
 

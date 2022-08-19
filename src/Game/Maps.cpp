@@ -20,6 +20,16 @@ void Maps::initVariables()
     this->heightObject = 20.0f;
 }
 
+//BackGround
+void Maps::initBackground(){
+    background.loadFromFile("assets/img/bgTexture.png");
+    sp_background.setTexture(background);
+}
+
+void Maps::renderBackground(sf::RenderTarget *target){
+    target->draw(sp_background);
+}
+
 // Create & Render Platforms
 void Maps::createPlatforms()
 {
@@ -76,6 +86,7 @@ void Maps::initPlatforms()
     while (head)
     {
         head->value.initShape();
+        head->value.initTexture(texture.platformTexture);
         head = head->next_node;
     }
 }
@@ -127,8 +138,9 @@ void Maps::initObjects()
 {
     EntityNode *head = objects;
     while (head)
-    {
+    {   
         head->value.initShape();
+        head->value.initTexture(texture.trampTexture);
         head = head->next_node;
     }
 }

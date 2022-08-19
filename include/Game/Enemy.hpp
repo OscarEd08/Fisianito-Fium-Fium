@@ -5,7 +5,6 @@
 #include <SFML/Graphics.hpp>
 #include "Animation.hpp"
 #include "Collision.hpp"
-#include "GameTextures.hpp"
 #include "Entity.hpp"
 #include "DataStructures/EntityNode.hpp"
 #include "DataStructures/BulletNode.hpp"
@@ -23,9 +22,6 @@ private:
     void initObjects();
 
 public:
-    // Objects
-    GameTextures texture;
-
     // Gravity & Speed Variables
     float initPosX;
     float initPosY;

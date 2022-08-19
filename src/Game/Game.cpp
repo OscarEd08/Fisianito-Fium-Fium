@@ -34,6 +34,7 @@ void Game::initEntitys()
     player.initShape();
     map.initPlatforms();
     map.initObjects();
+    map.initBackground();
     this->ground.initAttributes(0, 670, 1280.0f, 100.0f);
     this->ground.initShape();
 }
@@ -96,15 +97,16 @@ void Game::update(float dt)
 void Game::render()
 {
     window->clear();
+    //   Draw game objects
+    // ground.renderOnGame(this->window);
+    map.renderBackground(this->window);
+    map.renderPlatforms(this->window);
+    map.renderObjects(this->window);
     if (player.isAlive)
     {
         player.renderOnGame(this->window);
         bulletList.renderBullets(this->window);
     }
-    //   Draw game objects
-    // ground.renderOnGame(this->window);
-    map.renderPlatforms(this->window);
-    map.renderObjects(this->window);
     // enemy.renderOnGame(this->window);
     enemy.renderEnemies(this->window);
 

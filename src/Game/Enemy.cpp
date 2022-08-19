@@ -72,7 +72,6 @@ void Enemy::checkCollisionWithPlatforms(EntityNode *platforms)
             isOnPlatform = true;
             return;
         }
-        shape.setFillColor(sf::Color::Cyan);
         head = head->next_node;
     }
     isOnPlatform = false;

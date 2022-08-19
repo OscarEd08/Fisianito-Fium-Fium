@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include "Game/GameTextures.hpp"
 enum CollisionDirection
 {
     Top,
@@ -38,6 +39,7 @@ public:
     // Inicializar variables
     void initAttributes(int posX = 0, int posY = 0, float width = 0.0, float height = 0.0);
     void initShape();
+    void initTexture(sf::Texture &texture);
     // Devolver datos
     float getYCord();
     float getXCord();

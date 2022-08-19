@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Platform.hpp"
+#include "GameTextures.hpp"
 #include "DataStructures/EntityNode.hpp"
 
 class Maps : public Entity
@@ -32,6 +33,11 @@ public:
     // Platform attributes & functions
     EntityNode *platforms;
     EntityNode *objects;
+    GameTextures texture;
+    sf::Texture background;
+    sf::Sprite sp_background;
+    void initBackground();
+    void renderBackground(sf::RenderTarget *target);
     void initObjects();
     void renderObjects(sf::RenderTarget *target);
     void initPlatforms();
