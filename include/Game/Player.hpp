@@ -86,7 +86,7 @@ private:
 public:
     void handleJump();
     void getAction();
-
+    bool isFacingRight();
     Directions getFaceDirection();
     void update(EntityNode *platforms, float dt);
     void checkCollisionWithPlatforms(EntityNode *platforms);
