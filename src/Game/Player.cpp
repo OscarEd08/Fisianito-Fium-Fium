@@ -32,8 +32,6 @@ void Player::initVariables()
     isJumping = false;
     isOnPlatform = false;
     // Bullets
-    bullets = nullptr;
-
     faceDirection = Directions::Right;
 }
 
@@ -207,36 +205,7 @@ bool Player::isOnFloor()
     return getYCord() == groundHeight;
 }
 
-void Player::shotBullet()
+Directions Player::getFaceDirection()
 {
-    std::cout << "Fire on the hole\n";
-    float bulletYPos = posY + posY / 3;
-    float bulletXPos = posX + width + 10;
-    Bullet newBullet(bulletXPos, bulletYPos, faceDirection);
-    if (!bullets)
-    {
-        std::cout << "Creating bullets list\n";
-        bullets = new EntityNode();
-        bullets->value = newBullet;
-        return;
-    }
-    EntityNode *head = bullets;
-    while (head->next_node)
-    {
-        head = head->next_node;
-    }
-    head->next_node = new EntityNode();
-    head->next_node->value = newBullet;
-    std::cout << "Creating new bullet with cords: ";
-    head->next_node->value.logEntity();
-}
-
-void Player::renderBullets(sf::RenderTarget *target)
-{
-    EntityNode *head = bullets;
-    while (head)
-    {
-        head->value.renderOnGame(target);
-        head = head->next_node;
-    }
+    return faceDirection;
 }

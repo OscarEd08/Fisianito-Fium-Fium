@@ -4,6 +4,7 @@
 #include "Platform.hpp"
 #include "Enemy.hpp"
 #include "Maps.hpp"
+#include "Bullets.hpp"
 #include "DataStructures/EntityNode.hpp"
 /*Game engine class*/
 
@@ -25,6 +26,7 @@ private:
     Player player;
     Enemy enemy;
     Platform ground;
+    Bullets bulletList;
     Maps map;
     // Private functions
     void initVariables();

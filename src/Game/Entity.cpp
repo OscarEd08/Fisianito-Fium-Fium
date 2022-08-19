@@ -52,7 +52,7 @@ void Entity::moveEntity(float x_movement, float y_movement)
 
 void Entity::renderOnGame(sf::RenderTarget *target)
 {
-    target->draw(shape);
+    target->draw(this->shape);
 }
 
 void Entity::logEntity()

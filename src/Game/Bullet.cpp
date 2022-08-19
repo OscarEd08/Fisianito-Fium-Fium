@@ -1,11 +1,31 @@
 #include "Game/Bullet.hpp"
 
-Bullet::Bullet(float initialX, float initialY, Directions direction)
+Bullet::Bullet()
 {
-    this->initAttributes(initialX, initialY, 50.0f, 50.0f);
-    this->shape.setPosition(sf::Vector2f(initialX, initialY));
-    this->initShape();
+
     hasCollide = false;
+}
+
+void Bullet::setBulletDirection(Directions direction)
+{
+    switch (direction)
+    {
+    case Directions::Left:
+    {
+        directionX = -5.0f;
+        break;
+    }
+    case Directions::Right:
+    {
+        directionX = 5.0f;
+
+        break;
+    }
+
+    default:
+        break;
+    }
+    directionY = 0.0f;
 }
 void Bullet::checkCollisionWithBorders()
 { // Left collision
@@ -20,4 +40,9 @@ void Bullet::updateBullet()
     {
         shape.move(directionX, directionY);
     }
+}
+
+void Bullet::initBullet()
+{
+    this->shape.setFillColor(sf::Color::Yellow);
 }

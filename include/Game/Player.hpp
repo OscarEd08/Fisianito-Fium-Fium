@@ -29,7 +29,6 @@ private:
     // Objects
     GameTextures texture;
     Animation *animation;
-    EntityNode *bullets;
 
     // Gravity Variables
     int groundHeight;
@@ -61,12 +60,11 @@ private:
 
 public:
     void handleJump();
-    void shotBullet();
+    Directions getFaceDirection();
     void update(EntityNode *platforms);
     void checkCollisionWithPlatforms(EntityNode *platforms);
     void windowsCollision();
     void checkCollisionWithObjects(EntityNode *objects);
-    void renderBullets(sf::RenderTarget *target);
     // other functions
     sf::Vector2f getPosition() { return shape.getPosition(); }
 };

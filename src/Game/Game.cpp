@@ -1,5 +1,5 @@
 #include "Game/Game.hpp"
-
+#include <iostream>
 // Constructor-Destructor
 Game::Game() : view(sf::Vector2f(0.0f, 0.0f), sf::Vector2f(1600.0f, 800.0f))
 {
@@ -20,7 +20,6 @@ void Game::initVariables()
     videoMode.width = 1280;
     videoMode.height = 720;
     deltaTime = 0.0f;
-    // initObjects();
 }
 
 void Game::initWindow()
@@ -66,7 +65,7 @@ void Game::pollEvents()
         case sf::Event::KeyReleased:
         {
             if (ev.key.code == sf::Keyboard::F)
-                player.shotBullet();
+                bulletList.shotBullet(player.getYCord(), player.getXCord(), player.getHeight(), player.getFaceDirection());
             player.movementDirection = Directions::Down;
             player.isJumping = false;
             break;
@@ -78,9 +77,11 @@ void Game::pollEvents()
 void Game::update()
 {
     pollEvents();
+    // initBullets();
     player.update(map.platforms);
     enemy.checkCollisionWithPlatforms(map.platforms);
     player.checkCollisionWithObjects(map.objects);
+    bulletList.updateBullet();
     enemy.update();
 }
 
@@ -89,7 +90,7 @@ void Game::render()
     window->clear();
     //   Draw game objects
     player.renderOnGame(this->window);
-    player.renderBullets(this->window);
+    bulletList.renderBullets(this->window);
     ground.renderOnGame(this->window);
     map.renderPlatforms(this->window);
     map.renderObjects(this->window);
