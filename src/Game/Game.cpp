@@ -37,8 +37,6 @@ void Game::initEntitys()
     map.initPlatforms();
     map.initObjects();
     map.initBackground();
-    this->ground.initAttributes(0, 670, 1280.0f, 100.0f);
-    this->ground.initShape();
     gameOver.initVariables();
 }
 
@@ -98,27 +96,36 @@ void Game::update(float dt)
         enemy.removeDeadEnemies();
     }
     else{
-        endGame = true;
-        gameOver.update(this->window);
+        if(!gameOver.isRetryButtonPressed){
+            endGame = true;
+            gameOver.update(this->window);
+        }
+        else{
+            endGame = false;
+            //player.restartPlayer();
+            //player.isAlive = true;
+        }
+    
     }
 }
 
 void Game::render()
 {
     window->clear();
-    //   Draw game objects
-    map.renderBackground(this->window);
-    map.renderPlatforms(this->window);
-    map.renderObjects(this->window);
-    if (player.isAlive)
-    {
-        player.renderOnGame(this->window);
-        bulletList.renderBullets(this->window);
+    if(!endGame){
+        //   Draw game objects
+        map.renderBackground(this->window);
+        map.renderPlatforms(this->window);
+        map.renderObjects(this->window);
+        if (player.isAlive)
+        {
+            player.renderOnGame(this->window);
+            bulletList.renderBullets(this->window);
+        }
+        enemy.renderEnemies(this->window);
     }
-    enemy.renderEnemies(this->window);
-
     // Draw GameOver Screen
-    if(endGame){
+    else{
         gameOver.renderBackground(this->window);
     }
 

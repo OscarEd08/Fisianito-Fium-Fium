@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include "GameTextures.hpp"
 #include "GameFonts.hpp"
+#include "Player.hpp"
 
 class GameOver
 {
@@ -12,7 +13,9 @@ public:
     GameOver();
 public:
     bool restartGame;
+    bool isRetryButtonPressed;
 private:
+    Player player;
     GameTextures texture;
     sf::Sprite sp_gameOver;
 
@@ -24,7 +27,7 @@ private:
 
     //Buttons
     bool isRetryButtonSelected;
-    bool isRetryButtonPressed;
+    //bool isRetryButtonPressed;
 
     bool isExitButtonSelected;
     bool isExitButtonPressed;

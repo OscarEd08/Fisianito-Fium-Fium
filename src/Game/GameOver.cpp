@@ -60,7 +60,8 @@ void GameOver::update(sf::RenderWindow *window){
     }
 
     if(isRetryButtonPressed){
-        restartGame = true;
+        //player.isAlive = true;
+        //restartGame = true;
     }
     else if(isExitButtonPressed){
         window->close();
