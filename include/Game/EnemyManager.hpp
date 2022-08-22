@@ -21,7 +21,7 @@ class EnemyManager
     private:
         void initVariables();
     public:
-        void checkCollisionWithPlayer(Player player);
+        void checkCollisionWithPlayer(sf::RectangleShape shape);
         void initEnemies();
         void updateManager();
         void renderEnemies(sf::RenderTarget *target);

@@ -80,7 +80,7 @@ void Game::update()
     //Enemy
     enemy.initEnemies();
     enemy.updateManager();
-    enemy.checkCollisionWithPlayer(player);
+    enemy.checkCollisionWithPlayer(player.getShape());
 }
 
 void Game::render()

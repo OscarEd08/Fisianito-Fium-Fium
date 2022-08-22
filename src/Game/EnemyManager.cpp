@@ -40,9 +40,9 @@ void EnemyManager::renderEnemies(sf::RenderTarget *target){
     }
 }
 
-void EnemyManager::checkCollisionWithPlayer(Player player){
+void EnemyManager::checkCollisionWithPlayer(sf::RectangleShape shape){
     for(int i=0; i<enemies.size(); i++){
-        if(player.getShape().getGlobalBounds().intersects(enemies[i].getShape().getGlobalBounds()))
+        if(shape.getGlobalBounds().intersects(enemies[i].getShape().getGlobalBounds()))
         {
             std::cout<<"me tan balaceando"<<std::endl;
         }
