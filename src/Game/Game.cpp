@@ -81,8 +81,11 @@ void Game::update(float dt)
     if (player.isAlive)
     {
         player.update(map.platforms, dt);
+        //Collision with traps
         player.checkCollisionWithObjects(map.objects);
-        player.checkCollisionWithEnemies(enemy);
+        //Collision with enemies
+        enemy.checkCollisionWithPlayer(player);
+        player.changeColorWhenCollideWithEnemy();
     }
     pollEvents();
     // enemy.checkImpactWithBullets(bulletList.bulletsList);

@@ -42,6 +42,14 @@ float Entity::getHeight()
     return height;
 }
 
+sf::RectangleShape Entity::getShape() { 
+    return this->shape; 
+}
+
+const sf::FloatRect Entity::getBounds() const{
+    return shape.getGlobalBounds();
+}
+
 void Entity::updateCords()
 {
     posX = shape.getPosition().x;

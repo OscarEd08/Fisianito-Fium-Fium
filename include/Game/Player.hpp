@@ -5,7 +5,6 @@
 #include "Collision.hpp"
 #include "GameTextures.hpp"
 #include "Entity.hpp"
-#include "EnemyManager.hpp"
 #include "DataStructures/EntityNode.hpp"
 #include "Bullet.hpp"
 enum JumpStatus
@@ -27,6 +26,7 @@ public:
     bool isJumping;
     int live;
     bool isAlive;
+    bool isCollideWithEnemy;
 
 private:
     // Objects
@@ -96,7 +96,7 @@ public:
     void checkCollisionWithPlatforms(EntityNode *platforms);
     void windowsCollision();
     void checkCollisionWithObjects(EntityNode *objects);
-    void checkCollisionWithEnemies(EnemyManager enemies);
+    void changeColorWhenCollideWithEnemy();
 
     // other functions
     sf::Vector2f getPosition() { return shape.getPosition(); }

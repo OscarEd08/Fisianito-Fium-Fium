@@ -56,6 +56,7 @@ protected:
 public:
     void renderOnGame(sf::RenderTarget *target);
     int getRandomNumber(int a, int b);
-    sf::RectangleShape getShape() { return this->shape; }
+    sf::RectangleShape getShape();
+    const sf::FloatRect getBounds() const;
     void logEntity();
 };

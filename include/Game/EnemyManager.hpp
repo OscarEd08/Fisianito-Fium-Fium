@@ -5,6 +5,7 @@
 #include "GameTextures.hpp"
 #include "Maps.hpp"
 #include <vector>
+#include "Player.hpp"
 
 class EnemyManager
 {
@@ -16,6 +17,7 @@ public:
 private:
     std::vector<Enemy> enemies;
     Maps map;
+    //Player player;
     float spawnTimerMax;
     float spawnTimer;
     float maxEnemies;
@@ -25,7 +27,7 @@ private:
 
 public:
     GameTextures texture;
-    sf::FloatRect getBounds();
+    void checkCollisionWithPlayer(Player &player);
     void initEnemies();
     void updateManager(BulletNode *bullets);
     void removeDeadEnemies();

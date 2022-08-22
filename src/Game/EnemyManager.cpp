@@ -1,7 +1,7 @@
 #include "Game/EnemyManager.hpp"
 #include <iostream>
 EnemyManager::EnemyManager()
-{
+{ 
     initVariables();
 }
 
@@ -70,8 +70,15 @@ void EnemyManager::removeDeadEnemies()
     }
 }
 
-sf::FloatRect EnemyManager::getBounds()
-{
-    for (auto i : enemies)
-        return i.getShape().getGlobalBounds();
+void EnemyManager::checkCollisionWithPlayer(Player &player){
+    for(int i=0; i<enemies.size(); i++){
+        if(player.getBounds().intersects(enemies[i].getBounds())){
+            //player.getShape().setFillColor(sf::Color::Red);
+            std::cout<<"me tan balaceando"<<std::endl;
+            player.live -=1;
+            player.isCollideWithEnemy = true;
+            return;
+        }
+        player.isCollideWithEnemy = false;
+    }
 }

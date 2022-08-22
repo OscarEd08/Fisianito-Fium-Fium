@@ -30,6 +30,7 @@ void Player::initVariables()
     live = 100;
     isAlive = true;
     jumpStatus = Neutral;
+    isCollideWithEnemy = false;
     // Status
     isJumping = false;
     isOnPlatform = false;
@@ -209,17 +210,12 @@ void Player::checkCollisionWithObjects(EntityNode *objects)
     }
 }
 
-void Player::checkCollisionWithEnemies(EnemyManager enemies)
-{
-    if (shape.getGlobalBounds().intersects(enemies.getBounds()))
-    {
+void Player::changeColorWhenCollideWithEnemy(){
+    if(isCollideWithEnemy){
         shape.setFillColor(sf::Color::Red);
-        std::cout << "muere" << std::endl;
-        live -= 1;
-
-        return;
     }
 }
+
 bool Player::isOnFloor()
 {
     return getYCord() == groundHeight;
