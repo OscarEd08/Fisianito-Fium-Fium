@@ -5,7 +5,6 @@
 #include "Collision.hpp"
 #include "GameTextures.hpp"
 #include "Entity.hpp"
-#include "EnemyManager.hpp"
 #include "DataStructures/EntityNode.hpp"
 #include "Bullet.hpp"
 enum JumpStatus
