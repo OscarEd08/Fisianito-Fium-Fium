@@ -59,13 +59,13 @@ void EnemyManager::removeDeadEnemies()
     {
         if (!enemies[i].isAlive)
         {
-            std::cout << "Ta muerto" << std::endl;
+            std::cout << "balaceao" << std::endl;
             indexToRemove.push_back(i);
         }
     }
     for (int index : indexToRemove)
     {
-        std::cout << "Borrando pa la wea" << std::endl;
+        std::cout << "Borrando enemigo" << std::endl;
         enemies.erase(enemies.begin() + index);
     }
 }
