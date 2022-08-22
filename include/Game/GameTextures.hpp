@@ -12,4 +12,5 @@ public:
     sf::Texture bulletTexture;
     sf::Texture ghostTexture;
     sf::Texture bgTexture;
+    sf::Texture gameOverTexture;
 };

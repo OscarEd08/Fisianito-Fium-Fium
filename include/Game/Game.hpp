@@ -8,6 +8,8 @@
 #include "Maps.hpp"
 #include "Bullets.hpp"
 #include "DataStructures/EntityNode.hpp"
+#include "GameTextures.hpp"
+#include "GameOver.hpp"
 /*Game engine class*/
 
 class Game
@@ -23,6 +25,9 @@ private:
     // Time
     float deltaTime;
     sf::Clock clock;
+    //Game Over variables
+    bool endGame;
+    GameOver gameOver;
 
     // Game objects
     Player player;

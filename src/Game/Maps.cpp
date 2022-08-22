@@ -20,8 +20,7 @@ void Maps::initVariables(){
 
 //BackGround
 void Maps::initBackground(){
-    background.loadFromFile("assets/img/bgTexture.png");
-    sp_background.setTexture(background);
+    sp_background.setTexture(texture.bgTexture);
 }
 
 void Maps::renderBackground(sf::RenderTarget *target){

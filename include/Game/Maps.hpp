@@ -34,7 +34,6 @@ public:
     EntityNode *platforms;
     EntityNode *objects;
     GameTextures texture;
-    sf::Texture background;
     sf::Sprite sp_background;
     void initBackground();
     void renderBackground(sf::RenderTarget *target);

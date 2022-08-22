@@ -20,6 +20,7 @@ void Game::initVariables()
     videoMode.width = 1280;
     videoMode.height = 720;
     deltaTime = 0.0f;
+    endGame = false;
 }
 
 void Game::initWindow()
@@ -31,12 +32,14 @@ void Game::initWindow()
 
 void Game::initEntitys()
 {
+
     player.initShape();
     map.initPlatforms();
     map.initObjects();
     map.initBackground();
     this->ground.initAttributes(0, 670, 1280.0f, 100.0f);
     this->ground.initShape();
+    gameOver.initVariables();
 }
 
 // Access
@@ -76,32 +79,34 @@ void Game::pollEvents()
 }
 
 void Game::update(float dt)
-{
-    // initBullets();
+{   
+    pollEvents();
+    //Update player
     if (player.isAlive)
     {
+        //Collision with platforms
         player.update(map.platforms, dt);
         //Collision with traps
         player.checkCollisionWithObjects(map.objects);
         //Collision with enemies
         enemy.checkCollisionWithPlayer(player);
         player.changeColorWhenCollideWithEnemy();
+        //Enemy & Bullets update
+        bulletList.updateBullets();
+        enemy.initEnemies();
+        enemy.updateManager(bulletList.bulletsList);
+        enemy.removeDeadEnemies();
     }
-    pollEvents();
-    // enemy.checkImpactWithBullets(bulletList.bulletsList);
-    //  enemy.checkCollisionWithPlatforms(map.platforms);
-    bulletList.updateBullets();
-    // enemy.update();
-    enemy.initEnemies();
-    enemy.updateManager(bulletList.bulletsList);
-    enemy.removeDeadEnemies();
+    else{
+        endGame = true;
+        gameOver.update(this->window);
+    }
 }
 
 void Game::render()
 {
     window->clear();
     //   Draw game objects
-    // ground.renderOnGame(this->window);
     map.renderBackground(this->window);
     map.renderPlatforms(this->window);
     map.renderObjects(this->window);
@@ -110,9 +115,12 @@ void Game::render()
         player.renderOnGame(this->window);
         bulletList.renderBullets(this->window);
     }
-    // enemy.renderOnGame(this->window);
     enemy.renderEnemies(this->window);
 
-    // renderPlatforms();
+    // Draw GameOver Screen
+    if(endGame){
+        gameOver.renderBackground(this->window);
+    }
+
     window->display();
 }
