@@ -1,28 +1,35 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
-#include <vector>
 #include "Enemy.hpp"
-#include "Player.hpp"
+#include "GameTextures.hpp"
 #include "Maps.hpp"
+#include <vector>
+#include "Player.hpp"
 
 class EnemyManager
 {
-    private:
-        /* data */
-    public:
-        EnemyManager();
-    private:
-        std::vector<Enemy> enemies;
-        Maps map;
-        float spawnTimerMax;
-        float spawnTimer;
-        float maxEnemies;
-    private:
-        void initVariables();
-    public:
-        void checkCollisionWithPlayer(sf::RectangleShape shape);
-        void initEnemies();
-        void updateManager();
-        void renderEnemies(sf::RenderTarget *target);
+private:
+    /* data */
+public:
+    EnemyManager();
+
+private:
+    std::vector<Enemy> enemies;
+    Maps map;
+    //Player player;
+    float spawnTimerMax;
+    float spawnTimer;
+    float maxEnemies;
+
+private:
+    void initVariables();
+
+public:
+    GameTextures texture;
+    void checkCollisionWithPlayer(Player &player);
+    void initEnemies();
+    void updateManager(BulletNode *bullets);
+    void removeDeadEnemies();
+    void renderEnemies(sf::RenderTarget *target);
 };

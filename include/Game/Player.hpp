@@ -7,7 +7,7 @@
 #include "Entity.hpp"
 #include "EnemyManager.hpp"
 #include "DataStructures/EntityNode.hpp"
-
+#include "Bullet.hpp"
 enum JumpStatus
 {
     Neutral,
@@ -25,12 +25,15 @@ public:
     // Atributos
 public:
     bool isJumping;
+    int live;
+    bool isAlive;
+    bool isCollideWithEnemy;
 
 private:
     // Objects
     GameTextures texture;
-    Animation *animation;
-    // Gravity & Movement Variables
+
+    // Gravity Variables
     int groundHeight;
     float moveSpeed;
     float gravitySpeed;
@@ -38,9 +41,38 @@ private:
     float accelerationY;
     bool isOnPlatform;
     JumpStatus jumpStatus;
+
     // Animation variables
     unsigned int row;
     bool faceRight;
+
+    Directions faceDirection;
+
+public:
+    // Objects
+    int animationRow;
+    enum animationTop
+    {
+        iddleRow,
+        runR,
+        runL,
+        jumpR,
+        jumpL
+    };
+    enum animationFrame
+    {
+        iddleR,
+        iddleL,
+        runJump,
+        hitR,
+        hitL
+    };
+    Animation *animation;
+    // Animacion actual
+    int currentCycle;
+    // Ciclo de animaciones total
+    Frame **frameCycles = new Frame *[5];
+    void createAnimationCycle();
 
     // Métodos
 private:
@@ -49,13 +81,22 @@ private:
     void initPlayer();
     void gravity();
     void updateInput();
+    void checkIfCarajitoVive();
     void handleKeyPressed(float &velocityY, sf::Vector2f &movement, float deltaTime);
     bool isOnFloor();
+    void updateBullets();
 
 public:
     void handleJump();
-    void update(EntityNode *platforms);
+    void getAction();
+    bool isFacingRight();
+    Directions getFaceDirection();
+    void update(EntityNode *platforms, float dt);
     void checkCollisionWithPlatforms(EntityNode *platforms);
     void windowsCollision();
     void checkCollisionWithObjects(EntityNode *objects);
+    void changeColorWhenCollideWithEnemy();
+
+    // other functions
+    sf::Vector2f getPosition() { return shape.getPosition(); }
 };

@@ -1,6 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-
+#include "Game/GameTextures.hpp"
 enum CollisionDirection
 {
     Top,
@@ -14,7 +14,6 @@ enum Directions
     Left,
     Right,
     Static
-
 };
 class Entity
 {
@@ -40,6 +39,7 @@ public:
     // Inicializar variables
     void initAttributes(int posX = 0, int posY = 0, float width = 0.0, float height = 0.0);
     void initShape();
+    void initTexture(sf::Texture &texture);
     // Devolver datos
     float getYCord();
     float getXCord();
@@ -56,6 +56,7 @@ protected:
 public:
     void renderOnGame(sf::RenderTarget *target);
     int getRandomNumber(int a, int b);
-    sf::RectangleShape getShape() { return this->shape; }
+    sf::RectangleShape getShape();
+    const sf::FloatRect getBounds() const;
     void logEntity();
 };

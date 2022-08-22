@@ -1,5 +1,5 @@
 #include "Game/Game.hpp"
-
+#include <iostream>
 // Constructor-Destructor
 Game::Game() 
 {
@@ -20,7 +20,6 @@ void Game::initVariables()
     videoMode.width = 1280;
     videoMode.height = 720;
     deltaTime = 0.0f;
-    // initObjects();
 }
 
 void Game::initWindow()
@@ -35,6 +34,9 @@ void Game::initEntitys()
     player.initShape();
     map.initPlatforms();
     map.initObjects();
+    map.initBackground();
+    this->ground.initAttributes(0, 670, 1280.0f, 100.0f);
+    this->ground.initShape();
 }
 
 // Access
@@ -62,7 +64,10 @@ void Game::pollEvents()
 
         case sf::Event::KeyReleased:
         {
-            player.movementDirection = Directions::Down;
+            if (ev.key.code == sf::Keyboard::F)
+                bulletList.shotBullet(player);
+            else
+                player.movementDirection = Directions::Static;
             player.isJumping = false;
             break;
         }
@@ -70,26 +75,44 @@ void Game::pollEvents()
     }
 }
 
-void Game::update()
+void Game::update(float dt)
 {
+    // initBullets();
+    if (player.isAlive)
+    {
+        player.update(map.platforms, dt);
+        //Collision with traps
+        player.checkCollisionWithObjects(map.objects);
+        //Collision with enemies
+        enemy.checkCollisionWithPlayer(player);
+        player.changeColorWhenCollideWithEnemy();
+    }
     pollEvents();
-    //Player
-    player.update(map.platforms);
-    player.checkCollisionWithObjects(map.objects);
-    //player.checkCollisionWithEnemies(enemy);
-    //Enemy
+    // enemy.checkImpactWithBullets(bulletList.bulletsList);
+    //  enemy.checkCollisionWithPlatforms(map.platforms);
+    bulletList.updateBullets();
+    // enemy.update();
     enemy.initEnemies();
-    enemy.updateManager();
-    enemy.checkCollisionWithPlayer(player.getShape());
+    enemy.updateManager(bulletList.bulletsList);
+    enemy.removeDeadEnemies();
 }
 
 void Game::render()
 {
     window->clear();
-    //Draw game objects
-    player.renderOnGame(this->window);
+    //   Draw game objects
+    // ground.renderOnGame(this->window);
+    map.renderBackground(this->window);
     map.renderPlatforms(this->window);
     map.renderObjects(this->window);
+    if (player.isAlive)
+    {
+        player.renderOnGame(this->window);
+        bulletList.renderBullets(this->window);
+    }
+    // enemy.renderOnGame(this->window);
     enemy.renderEnemies(this->window);
+
+    // renderPlatforms();
     window->display();
 }

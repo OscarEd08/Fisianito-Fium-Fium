@@ -18,6 +18,10 @@ void Entity::initShape()
     shape.setSize(sf::Vector2f(width, height));
 }
 
+void Entity::initTexture(sf::Texture &texture){
+    shape.setTexture(&texture);
+}
+
 float Entity::getXCord()
 {
     return shape.getPosition().x;
@@ -38,6 +42,14 @@ float Entity::getHeight()
     return height;
 }
 
+sf::RectangleShape Entity::getShape() { 
+    return this->shape; 
+}
+
+const sf::FloatRect Entity::getBounds() const{
+    return shape.getGlobalBounds();
+}
+
 void Entity::updateCords()
 {
     posX = shape.getPosition().x;
@@ -52,7 +64,7 @@ void Entity::moveEntity(float x_movement, float y_movement)
 
 void Entity::renderOnGame(sf::RenderTarget *target)
 {
-    target->draw(shape);
+    target->draw(this->shape);
 }
 
 void Entity::logEntity()
@@ -85,7 +97,7 @@ CollisionDirection Entity::checkCollision(Entity entity)
 
 int Entity::getRandomNumber(int a, int b)
 {
-    //srand(time(NULL));
+    // srand(time(NULL));
     int num;
     num = a + rand() % (b + 1 - a);
     return num;

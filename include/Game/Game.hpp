@@ -4,7 +4,9 @@
 #include "Platform.hpp"
 #include "EnemyManager.hpp"
 #include "Enemy.hpp"
+#include "EnemyManager.hpp"
 #include "Maps.hpp"
+#include "Bullets.hpp"
 #include "DataStructures/EntityNode.hpp"
 /*Game engine class*/
 
@@ -26,8 +28,8 @@ private:
     Player player;
     EnemyManager enemy;
     Platform ground;
+    Bullets bulletList;
     Maps map;
-
     // Private functions
     void initVariables();
     void initWindow();
@@ -43,6 +45,6 @@ public:
 
     // Functions
     void pollEvents();
-    void update();
+    void update(float dt);
     void render();
 };

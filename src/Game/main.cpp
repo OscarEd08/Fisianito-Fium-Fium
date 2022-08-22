@@ -3,11 +3,14 @@
 #include <time.h>
 #include <SFML/Graphics.hpp>
 #include "Game/Game.hpp"
+#include <stdlib.h>
+#include <time.h>
 
 int main()
 {
     // Init Game
 
+    srand(time(NULL));
     Game game;
     sf::Clock clock;
     float accumulator = 0;
@@ -21,7 +24,7 @@ int main()
         while (accumulator >= timestep)
         {
             accumulator -= timestep;
-            game.update();
+            game.update(clock.getElapsedTime().asMicroseconds());
         }
 
         // Render

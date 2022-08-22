@@ -6,7 +6,7 @@ enable_testing()
 IF (WIN32)
 # Windows specific config
   # Include local sfml cmake config
-  set(SFML_DIR "C:/Users/Luu/Downloads/SFML-2.5.1/lib/cmake/SFML")
+  set(SFML_DIR "C:/dev/SFML-2.5.1/lib/cmake/SFML/")
 ENDIF()
 
 find_package(SFML
@@ -16,18 +16,26 @@ find_package(SFML
 include_directories(include)
 add_executable(fisianito
   include/Game/Animation.hpp
-  include/Game/Collision.hpp
+  include/Game/Bullet.hpp
+  include/Game/Bullets.hpp
   include/Game/Enemy.hpp
+  include/Game/EnemyManager.hpp
   include/Game/Entity.hpp
+  include/Game/Frame.hpp
+  include/Game/Collision.hpp
   include/Game/Game.hpp
   include/Game/GameTextures.hpp
   include/Game/Maps.hpp
   include/Game/Platform.hpp
   include/Game/Player.hpp
   include/DataStructures/EntityNode.hpp
+  include/DataStructures/BulletNode.hpp         
   src/Game/Animation.cpp
+  src/Game/Bullet.cpp
+  src/Game/Bullets.cpp
   src/Game/Collision.cpp
   src/Game/Enemy.cpp
+  src/Game/EnemyManager.cpp
   src/Game/Entity.cpp
   src/Game/Game.cpp
   src/Game/GameTextures.cpp

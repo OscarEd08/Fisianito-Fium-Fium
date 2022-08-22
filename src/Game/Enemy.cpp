@@ -1,11 +1,14 @@
 #include "Game/Enemy.hpp"
-
+#include <iostream>
 // Constructor-Destructor
 Enemy::Enemy()
 {
     isSpawn = true;
-    //this->initVariables();
-    //this->initEnemy();
+    live = 30;
+    isAlive = true;
+
+    // this->initVariables();
+    // this->initEnemy();
 }
 
 Enemy::~Enemy() {}
@@ -14,20 +17,20 @@ Enemy::~Enemy() {}
 void Enemy::initVariables()
 {
     // Position
-    initPosX = getRandomNumber(0,1230);
+    initPosX = getRandomNumber(0, 1230);
     initPosY = 0 - shape.getGlobalBounds().height;
-    std::cout<<initPosX<<std::endl;
     // Speed
     moveSpeed = 50.f;
-    //Spawn condition
+    // Spawn condition
     isSpawn = false;
 }
 
 void Enemy::initEnemy()
 {
-    if(isSpawn){
+    if (isSpawn)
+    {
         initVariables();
-        this->initAttributes(initPosX,initPosY, 50.f, 50.f);
+        this->initAttributes(initPosX, initPosY, 50.f, 50.f);
     }
 }
 
@@ -41,17 +44,17 @@ void Enemy::moveEnemy()
         moveSpeed *= -1;
     }
 
-    //Fall logic
+    // Fall logic
     if (!isOnPlatform)
     {
         fallSpeed = getRandomNumber(5, 10);
         movement.y += fallSpeed * deltatime;
     }
 
-    //Horizontal movement
+    // Horizontal movement
     movement.x += moveSpeed * deltatime;
 
-    moveEntity(movement.x,movement.y);
+    moveEntity(movement.x, movement.y);
 }
 
 void Enemy::update()
@@ -94,4 +97,27 @@ bool Enemy::playerIsOnPlatform(Entity platform)
     if (posX > minusLimitOnX && posX < superiorLimitOnX && epsilonEquals(posY, limitOnY))
         return true;
     return false;
+}
+
+void Enemy::checkImpactWithBullets(BulletNode *bullets)
+{
+    BulletNode *head = bullets;
+    while (head)
+    {
+        if (shape.getGlobalBounds().intersects(head->value.getShape().getGlobalBounds()))
+        {
+            std::cout << "Balaceado por los municipales" << std::endl;
+            head->value.hasCollide = true;
+            live -= head->value.damage;
+            std::cout << "Live of enemy: " << live << std::endl;
+            checkIfIsAlive();
+        }
+        head = head->next_node;
+    }
+}
+
+void Enemy::checkIfIsAlive()
+{
+    if (live <= 0)
+        isAlive = false;
 }
