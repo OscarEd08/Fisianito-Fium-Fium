@@ -87,6 +87,7 @@ private:
     void updateBullets();
 
 public:
+    void resetPlayer();
     void handleJump();
     void getAction();
     bool isFacingRight();

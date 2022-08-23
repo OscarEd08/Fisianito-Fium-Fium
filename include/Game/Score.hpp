@@ -16,14 +16,20 @@ typedef struct nodo* TpList;
 
 class Score
 {
-private:
-	int score=0,cont=0;
-	int bscores[99];
-	bool guardado=false;
-	TpList points=NULL;
 
 public:
 	Score();
+
+private:
+	int score;
+	int bscores[99];
+	bool guardado;
+	TpList points;
+
+public:
+	int getScore();
+	void initVariables();
+	void resetScore();
 	void enemyScore();
 	void finalScore();
 	TpList initNodo(int num);//crear nodo

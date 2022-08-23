@@ -4,6 +4,7 @@
 #include "GameTextures.hpp"
 #include "GameFonts.hpp"
 #include "Player.hpp"
+#include "Score.hpp"
 
 class GameOver
 {
@@ -13,6 +14,7 @@ public:
     GameOver();
 public:
     bool isRetryButtonPressed;
+    sf::Text finalScore;
 private:
     Player player;
     GameTextures texture;
@@ -20,6 +22,7 @@ private:
 
     //Text on screen
     GameFonts font;
+    Score points;
     sf::Text gameOverTitle;
     sf::Text retryButton;
     sf::Text exitButton;

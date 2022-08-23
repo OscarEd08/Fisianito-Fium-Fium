@@ -42,6 +42,12 @@ void Player::initPlayer()
     this->shape.setTexture(&texture.playerTexture);
 }
 
+void Player::resetPlayer(){
+    isAlive = true;
+    live = 100;
+    shape.setPosition(20,groundHeight);
+}
+
 void Player::initObjects()
 {
     // Animacion general inicio

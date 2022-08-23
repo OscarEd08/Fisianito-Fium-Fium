@@ -42,7 +42,7 @@ void Game::initEntitys()
 }
 
 // Access
-const bool Game::running() const
+bool Game::running()
 {
     return this->window->isOpen();
 }
@@ -97,16 +97,20 @@ void Game::update(float dt)
         enemy.updateManager(bulletList.bulletsList);
         enemy.removeDeadEnemies(&points);
     }
+    //Playes is not alived
     else{
+        //Lose
         if(!gameOver.isRetryButtonPressed){
-            endGame = true;
             gameOver.update(this->window);
             points.finalScore();
+            endGame = true;
         }
+        //Retry
         else{
             endGame = false;
-            //player.restartPlayer();
-            //player.isAlive = true;
+            player.resetPlayer();
+            points.resetScore();
+            gameOver.isRetryButtonPressed = false;
         }
     
     }
@@ -130,6 +134,7 @@ void Game::render()
     }
     // Draw GameOver Screen
     else{
+        gameOver.finalScore.setString("Score Final:  "+std::to_string(points.getScore()));
         gameOver.renderBackground(this->window);
     }
 

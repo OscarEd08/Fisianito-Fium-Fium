@@ -19,12 +19,16 @@ void GameOver::initVariables(){
     retryButton.setFont(font.font_gameOver);
     retryButton.setString("Retry");
     retryButton.setCharacterSize(50);
-    retryButton.setPosition(550,500);
+    retryButton.setPosition(570,500);
     //EXIT BUTTON
     exitButton.setFont(font.font_gameOver);
     exitButton.setString("Exit");
     exitButton.setCharacterSize(50);
-    exitButton.setPosition(550,600);
+    exitButton.setPosition(590,600);
+    //FINAL SCORE
+    finalScore.setFont(font.font_score);
+    finalScore.setCharacterSize(40);
+    finalScore.setPosition(460,100);
 
 }
 
@@ -75,4 +79,5 @@ void GameOver::renderBackground(sf::RenderTarget *target){
     target->draw(sp_gameOver);
     target->draw(exitButton);
     target->draw(retryButton);
+    target->draw(finalScore);
 }

@@ -27,7 +27,6 @@ private:
     float deltaTime;
     sf::Clock clock;
     //Game Over variables
-    bool endGame;
     GameOver gameOver;
 
     // Game objects
@@ -47,7 +46,8 @@ public:
     virtual ~Game();
 
     // Access
-    const bool running() const;
+    bool running();
+    bool endGame;
 
     // Functions
     void pollEvents();

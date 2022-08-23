@@ -3,17 +3,28 @@
 #include"Game/Score.hpp"
 
 Score::Score(){
+	initVariables();
+}
 
-};
+void Score::initVariables(){
+	score = 0;
+	guardado = false;
+	points=NULL;
+}
 
 void Score::enemyScore(){
     score+=5;
     std::cout<<score<<std::endl;
-};
+}
+
+void Score::resetScore(){
+	score = 0;
+	guardado = false;
+}
+
 void Score::finalScore(){
     
     if(guardado==false){
-        std::cout<<"Puntaje final: "<<score<<std::endl;
         readScore();
         selection();
         saveScore();
@@ -21,6 +32,11 @@ void Score::finalScore(){
         
     }    
 }
+
+int Score::getScore(){
+	return this->score;
+}
+
 TpList Score::initNodo(int num){
     TpList nuevo = NULL;
 	nuevo = new(struct nodo);

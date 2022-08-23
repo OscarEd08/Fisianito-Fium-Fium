@@ -9,7 +9,7 @@ void EnemyManager::initVariables()
 {
     spawnTimerMax = 500.0f;
     spawnTimer = spawnTimerMax;
-    maxEnemies = 10;
+    maxEnemies = 50;
 }
 
 void EnemyManager::updateManager(BulletNode *bullets)
