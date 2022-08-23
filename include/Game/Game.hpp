@@ -34,7 +34,7 @@ private:
     EnemyManager enemy;
     Bullets bulletList;
     Maps map;
-    Score points;
+    Score score;
     // Private functions
     void initVariables();
     void initWindow();

@@ -74,6 +74,10 @@ void GameOver::update(sf::RenderWindow *window){
     }
 }
 
+void GameOver::updateScore(Score score){
+    finalScore.setString("Score Final:  "+std::to_string(score.getScore()));
+}
+
 
 void GameOver::renderBackground(sf::RenderTarget *target){
     target->draw(sp_gameOver);

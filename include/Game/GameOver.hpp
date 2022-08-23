@@ -22,7 +22,6 @@ private:
 
     //Text on screen
     GameFonts font;
-    Score points;
     sf::Text gameOverTitle;
     sf::Text retryButton;
     sf::Text exitButton;
@@ -39,6 +38,7 @@ private:
 
 public:
     void initVariables();
+    void updateScore(Score score);
     void update(sf::RenderWindow *window);
     void renderBackground(sf::RenderTarget *target);
 

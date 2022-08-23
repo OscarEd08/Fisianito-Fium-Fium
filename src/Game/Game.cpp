@@ -92,28 +92,29 @@ void Game::update(float dt)
         //Collision with enemies
         enemy.checkCollisionWithPlayer(player);
         player.changeColorWhenCollideWithEnemy();
-        player.checkCollisionWithHearts(map.hearts,&points);
+        player.checkCollisionWithHearts(map.hearts,&score);
         //Enemy & Bullets update
         bulletList.updateBullets();
         enemy.initEnemies();
         enemy.updateManager(bulletList.bulletsList);
-        enemy.removeDeadEnemies(&points);
+        enemy.removeDeadEnemies(&score);
         map.updateLifeBar(player);
-        map.updateTextScore(points);
+        map.updateTextScore(score);
     }
     //Playes is not alived
     else{
         //Lose
         if(!gameOver.isRetryButtonPressed){
             gameOver.update(this->window);
-            points.finalScore();
+            gameOver.updateScore(score);
+            score.finalScore();
             endGame = true;
         }
         //Retry
         else{
             endGame = false;
             player.resetPlayer();
-            points.resetScore();
+            score.resetScore();
             gameOver.isRetryButtonPressed = false;
         }
     
@@ -140,7 +141,6 @@ void Game::render()
     }
     // Draw GameOver Screen
     else{
-        gameOver.finalScore.setString("Score Final:  "+std::to_string(points.getScore()));
         gameOver.renderBackground(this->window);
     }
 
