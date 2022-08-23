@@ -134,7 +134,6 @@ void Player::update(EntityNode *platforms, float dt)
     checkCollisionWithPlatforms(platforms);
     gravity();
     windowsCollision();
-    std::cout << "Vida del carajito: " << live << std::endl;
     checkIfCarajitoVive();
     // Animacion
     // std::cout<<"\nEje X:"<<this->animation->uvRect.width;

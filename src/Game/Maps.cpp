@@ -6,6 +6,7 @@
 Maps::Maps(){
 
     initVariables();
+    createLifeBar();
     createPlatforms();
     createObjects();
     createHearts();
@@ -26,6 +27,29 @@ void Maps::initBackground(){
 
 void Maps::renderBackground(sf::RenderTarget *target){
     target->draw(sp_background);
+}
+
+//Create bar life
+void Maps::createLifeBar(){
+    lifeBar.initAttributes(50,25,300.0f,25.0f);
+    lifeBarBack.initAttributes(50,25,300.0f,25.0f);
+}
+
+void Maps::initLifeBar(){
+    lifeBar.initShape();
+    lifeBar.initTexture(texture.lifeBarTexture);
+    lifeBarBack.initShape();
+}
+
+void Maps::updateLifeBar(Player player){
+    float hpPercent = static_cast<float>(player.live) / 100;
+    lifeBar.initAttributes(50,25,300.f * hpPercent,25.0f);
+    lifeBar.initShape();
+}
+
+void Maps::renderLifeBar(sf::RenderTarget *target){
+    lifeBarBack.renderOnGame(target);
+    lifeBar.renderOnGame(target);
 }
 
 // Create & Render Platforms

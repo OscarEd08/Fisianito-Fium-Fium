@@ -38,6 +38,7 @@ void Game::initEntitys()
     map.initObjects();
     map.initBackground();
     map.initHearts();
+    map.initLifeBar();
     gameOver.initVariables();
 }
 
@@ -96,6 +97,7 @@ void Game::update(float dt)
         enemy.initEnemies();
         enemy.updateManager(bulletList.bulletsList);
         enemy.removeDeadEnemies(&points);
+        map.updateLifeBar(player);
     }
     //Playes is not alived
     else{
@@ -125,6 +127,7 @@ void Game::render()
         map.renderPlatforms(this->window);
         map.renderObjects(this->window);
         map.renderHearts(this->window);
+        map.renderLifeBar(this->window);
         if (player.isAlive)
         {
             player.renderOnGame(this->window);

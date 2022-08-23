@@ -2,6 +2,7 @@
 
 #include "Platform.hpp"
 #include "GameTextures.hpp"
+#include "Player.hpp"
 #include "DataStructures/EntityNode.hpp"
 
 class Maps : public Entity
@@ -28,8 +29,10 @@ private:
     void createPlatforms();
     // Objects
     void createObjects();
-     //coins
+     //Hearts
     void createHearts();
+    //Life bar
+    void createLifeBar();
 
 public:
     // Platform attributes & functions
@@ -38,8 +41,13 @@ public:
     EntityNode *hearts;
     GameTextures texture;
     sf::Sprite sp_background;
+    Entity lifeBar;
+    Entity lifeBarBack;
     void initBackground();
     void renderBackground(sf::RenderTarget *target);
+    void initLifeBar();
+    void updateLifeBar(Player player);
+    void renderLifeBar(sf::RenderTarget *target);
     void initObjects();
     void renderObjects(sf::RenderTarget *target);
     void initPlatforms();

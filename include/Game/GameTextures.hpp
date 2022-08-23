@@ -14,4 +14,5 @@ public:
     sf::Texture bgTexture;
     sf::Texture gameOverTexture;
     sf::Texture heartTexture;
+    sf::Texture lifeBarTexture;
 };
