@@ -3,6 +3,8 @@
 #include "Platform.hpp"
 #include "GameTextures.hpp"
 #include "Player.hpp"
+#include "GameFonts.hpp"
+#include "Score.hpp"
 #include "DataStructures/EntityNode.hpp"
 
 class Maps : public Entity
@@ -41,10 +43,16 @@ public:
     EntityNode *hearts;
     GameTextures texture;
     sf::Sprite sp_background;
+    //Life bar && Score on screen
+    GameFonts font;
+    sf::Text score_text;
     Entity lifeBar;
     Entity lifeBarBack;
     void initBackground();
     void renderBackground(sf::RenderTarget *target);
+    void initTextScore();
+    void updateTextScore(Score score);
+    void renderTextScore(sf::RenderTarget *target);
     void initLifeBar();
     void updateLifeBar(Player player);
     void renderLifeBar(sf::RenderTarget *target);

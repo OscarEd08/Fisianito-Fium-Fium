@@ -29,7 +29,22 @@ void Maps::renderBackground(sf::RenderTarget *target){
     target->draw(sp_background);
 }
 
-//Create bar life
+//Show score on screen
+void Maps::initTextScore(){
+    score_text.setFont(font.font_score);
+    score_text.setCharacterSize(20);
+    score_text.setPosition(1100,25);
+}
+
+void Maps::updateTextScore(Score score){
+    score_text.setString("Score: "+std::to_string(score.getScore()));
+}
+
+void Maps::renderTextScore(sf::RenderTarget *target){
+    target->draw(score_text);
+}
+
+//Create life bar
 void Maps::createLifeBar(){
     lifeBar.initAttributes(50,25,300.0f,25.0f);
     lifeBarBack.initAttributes(50,25,300.0f,25.0f);
