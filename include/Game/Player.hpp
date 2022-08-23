@@ -96,7 +96,7 @@ public:
     void windowsCollision();
     void checkCollisionWithObjects(EntityNode *objects);
     void changeColorWhenCollideWithEnemy();
-    void checkCollisionWithCoins(EntityNode *coins, Score *points);
+    void checkCollisionWithHearts(EntityNode *hearts, Score *points);
 
 
     // other functions

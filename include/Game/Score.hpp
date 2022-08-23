@@ -24,7 +24,6 @@ private:
 
 public:
 	Score();
-	void coinScore();
 	void enemyScore();
 	void finalScore();
 	TpList initNodo(int num);//crear nodo

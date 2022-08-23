@@ -5,7 +5,11 @@ GameOver::GameOver(){
 }
 
 void GameOver::initVariables(){
-    restartGame = false;
+    //Buttons
+    isExitButtonSelected = false;
+    isExitButtonPressed = false;
+    isRetryButtonSelected = true;
+    isRetryButtonPressed = false;
     //GAME OVER BRACKGROUND
     sp_gameOver.setTexture(texture.gameOverTexture);
     //GAME OVER TEXT
@@ -37,14 +41,13 @@ void GameOver::updateInput(){
             isExitButtonSelected = true;
         }
     }
-    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Return)){
-        isRetryButtonPressed = false;
-        isExitButtonPressed = false;
+    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)){
 
         if (isRetryButtonSelected)
             isRetryButtonPressed = true;                
-        else
+        else{
             isExitButtonPressed = true;
+        }
     }
 }
 
@@ -59,7 +62,10 @@ void GameOver::update(sf::RenderWindow *window){
         retryButton.setFillColor(sf::Color::White);
     }
 
-    if(isExitButtonPressed){
+    if (isRetryButtonPressed){
+
+    }
+    else if(isExitButtonPressed){
         window->close();
     }
 }
@@ -67,6 +73,6 @@ void GameOver::update(sf::RenderWindow *window){
 
 void GameOver::renderBackground(sf::RenderTarget *target){
     target->draw(sp_gameOver);
-    target->draw(retryButton);
     target->draw(exitButton);
+    target->draw(retryButton);
 }

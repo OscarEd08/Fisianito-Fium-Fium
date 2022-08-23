@@ -12,7 +12,6 @@ private:
 public:
     GameOver();
 public:
-    bool restartGame;
     bool isRetryButtonPressed;
 private:
     Player player;

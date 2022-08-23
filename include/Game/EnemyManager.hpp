@@ -31,6 +31,6 @@ public:
     void checkCollisionWithPlayer(Player &player);
     void initEnemies();
     void updateManager(BulletNode *bullets);
-    void removeDeadEnemies(Score *points);
+    void removeDeadEnemies(Score *hearts);
     void renderEnemies(sf::RenderTarget *target);
 };

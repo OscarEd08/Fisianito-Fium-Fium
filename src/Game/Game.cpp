@@ -37,7 +37,7 @@ void Game::initEntitys()
     map.initPlatforms();
     map.initObjects();
     map.initBackground();
-    map.initCoins();
+    map.initHearts();
     gameOver.initVariables();
 }
 
@@ -90,7 +90,7 @@ void Game::update(float dt)
         //Collision with enemies
         enemy.checkCollisionWithPlayer(player);
         player.changeColorWhenCollideWithEnemy();
-        player.checkCollisionWithCoins(map.coins,&points);
+        player.checkCollisionWithHearts(map.hearts,&points);
         //Enemy & Bullets update
         bulletList.updateBullets();
         enemy.initEnemies();
@@ -120,7 +120,7 @@ void Game::render()
         map.renderBackground(this->window);
         map.renderPlatforms(this->window);
         map.renderObjects(this->window);
-        map.renderCoins(this->window);
+        map.renderHearts(this->window);
         if (player.isAlive)
         {
             player.renderOnGame(this->window);

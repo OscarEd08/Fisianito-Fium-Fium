@@ -9,6 +9,7 @@ GameTextures::GameTextures()
     ghostTexture.loadFromFile("assets/img/ghost.png");
     bgTexture.loadFromFile("assets/img/bgTexture.png");
     gameOverTexture.loadFromFile("assets/img/gameOver.png");
+    heartTexture.loadFromFile("assets/img/heart.png");
     //Platforms
     platformTexture.loadFromFile("assets/img/plataformTexture.png");
     platformTexture.setRepeated(true);

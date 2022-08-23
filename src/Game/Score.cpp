@@ -6,10 +6,6 @@ Score::Score(){
 
 };
 
-void Score::coinScore(){
-    score++;
-    std::cout<<score<<std::endl;
-};
 void Score::enemyScore(){
     score+=5;
     std::cout<<score<<std::endl;

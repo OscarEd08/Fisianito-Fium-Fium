@@ -8,7 +8,7 @@ Maps::Maps(){
     initVariables();
     createPlatforms();
     createObjects();
-    createCoins();
+    createHearts();
 }
 
 void Maps::initVariables(){
@@ -124,42 +124,53 @@ void Maps::renderObjects(sf::RenderTarget *target){
     }
 }
 
-void Maps::createCoins()
+void Maps::createHearts()
 {
-    coins = new EntityNode();
-    EntityNode *head = coins;
-    float c_posX, c_posY;
+    hearts = new EntityNode();
+    EntityNode *head = hearts;
+    float c_posX, c_posY = 100.0f, sumX;
 
     for (int i = 0; i < 3; i++){
+        int addY = 180 * i;
         switch (i){
-            case 0: c_posX = 200.0f; c_posY = 100.0f; break;
-            case 1: c_posX = 300.0f; c_posY = 300.0f; break;
-            case 2: c_posX = 600.0f; c_posY = 60.0f; break;
+            case 0: c_posX = 200.0f; sumX = 860; break;
+            case 1: c_posX = 100.0f; sumX = 1060; break;
+            case 2: c_posX = 50.0f; sumX = 1160; break;
         }
-        for(int j = 0; j < 3; j++){
-            Entity coin;
-            int addX =  880 * j;
-            coin.initAttributes(c_posX + addX, c_posY, 15, 15);
-            head->value = coin;
+        for(int j = 0; j < 2; j++){
+            Entity heart;
+            int addX =  sumX * j;
+            heart.initAttributes(c_posX + addX, c_posY + addY, 30, 30);
+            head->value = heart;
             head->next_node = new EntityNode();
             head = head->next_node;  
+
+            if (i == 1 && j == 1){
+                Entity centerHeart;
+                centerHeart.initAttributes(630, c_posY + 180, 30, 30);
+
+                head->value = centerHeart;
+                head->next_node = new EntityNode();
+                head = head->next_node;
+            }
         }      
-        }
+    }
 }
 
-void Maps::initCoins()
+void Maps::initHearts()
 {
-    EntityNode *head = coins;
+    EntityNode *head = hearts;
     while (head)
     {
         head->value.initShape();
+        head->value.initTexture(texture.heartTexture);
         head = head->next_node;
     }
 }
 
-void Maps::renderCoins(sf::RenderTarget *target)
+void Maps::renderHearts(sf::RenderTarget *target)
 {
-    EntityNode *head = coins;
+    EntityNode *head = hearts;
     while (head)
     {
         head->value.renderOnGame(target);
