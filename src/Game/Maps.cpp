@@ -8,6 +8,7 @@ Maps::Maps(){
     initVariables();
     createPlatforms();
     createObjects();
+    createCoins();
 }
 
 void Maps::initVariables(){
@@ -118,6 +119,49 @@ void Maps::initObjects(){
 void Maps::renderObjects(sf::RenderTarget *target){
     EntityNode *head = objects;
     while(head){
+        head->value.renderOnGame(target);
+        head = head->next_node;
+    }
+}
+
+void Maps::createCoins()
+{
+    coins = new EntityNode();
+    EntityNode *head = coins;
+    float c_posX, c_posY;
+
+    for (int i = 0; i < 3; i++){
+        switch (i){
+            case 0: c_posX = 200.0f; c_posY = 100.0f; break;
+            case 1: c_posX = 300.0f; c_posY = 300.0f; break;
+            case 2: c_posX = 600.0f; c_posY = 60.0f; break;
+        }
+        for(int j = 0; j < 3; j++){
+            Entity coin;
+            int addX =  880 * j;
+            coin.initAttributes(c_posX + addX, c_posY, 15, 15);
+            head->value = coin;
+            head->next_node = new EntityNode();
+            head = head->next_node;  
+        }      
+        }
+}
+
+void Maps::initCoins()
+{
+    EntityNode *head = coins;
+    while (head)
+    {
+        head->value.initShape();
+        head = head->next_node;
+    }
+}
+
+void Maps::renderCoins(sf::RenderTarget *target)
+{
+    EntityNode *head = coins;
+    while (head)
+    {
         head->value.renderOnGame(target);
         head = head->next_node;
     }

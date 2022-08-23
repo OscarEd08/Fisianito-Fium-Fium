@@ -59,11 +59,7 @@ void GameOver::update(sf::RenderWindow *window){
         retryButton.setFillColor(sf::Color::White);
     }
 
-    if(isRetryButtonPressed){
-        //player.isAlive = true;
-        //restartGame = true;
-    }
-    else if(isExitButtonPressed){
+    if(isExitButtonPressed){
         window->close();
     }
 }

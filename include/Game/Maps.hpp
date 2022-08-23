@@ -28,11 +28,14 @@ private:
     void createPlatforms();
     // Objects
     void createObjects();
+     //coins
+    void createCoins();
 
 public:
     // Platform attributes & functions
     EntityNode *platforms;
     EntityNode *objects;
+    EntityNode *coins;
     GameTextures texture;
     sf::Sprite sp_background;
     void initBackground();
@@ -41,4 +44,6 @@ public:
     void renderObjects(sf::RenderTarget *target);
     void initPlatforms();
     void renderPlatforms(sf::RenderTarget *target);
+    void initCoins();
+    void renderCoins(sf::RenderTarget *target);
 };

@@ -37,6 +37,7 @@ void Game::initEntitys()
     map.initPlatforms();
     map.initObjects();
     map.initBackground();
+    map.initCoins();
     gameOver.initVariables();
 }
 
@@ -89,16 +90,18 @@ void Game::update(float dt)
         //Collision with enemies
         enemy.checkCollisionWithPlayer(player);
         player.changeColorWhenCollideWithEnemy();
+        player.checkCollisionWithCoins(map.coins,&points);
         //Enemy & Bullets update
         bulletList.updateBullets();
         enemy.initEnemies();
         enemy.updateManager(bulletList.bulletsList);
-        enemy.removeDeadEnemies();
+        enemy.removeDeadEnemies(&points);
     }
     else{
         if(!gameOver.isRetryButtonPressed){
             endGame = true;
             gameOver.update(this->window);
+            points.finalScore();
         }
         else{
             endGame = false;
@@ -117,6 +120,7 @@ void Game::render()
         map.renderBackground(this->window);
         map.renderPlatforms(this->window);
         map.renderObjects(this->window);
+        map.renderCoins(this->window);
         if (player.isAlive)
         {
             player.renderOnGame(this->window);

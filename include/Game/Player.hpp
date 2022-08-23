@@ -7,6 +7,7 @@
 #include "Entity.hpp"
 #include "DataStructures/EntityNode.hpp"
 #include "Bullet.hpp"
+#include "Score.hpp"
 enum JumpStatus
 {
     Neutral,
@@ -95,6 +96,8 @@ public:
     void windowsCollision();
     void checkCollisionWithObjects(EntityNode *objects);
     void changeColorWhenCollideWithEnemy();
+    void checkCollisionWithCoins(EntityNode *coins, Score *points);
+
 
     // other functions
     sf::Vector2f getPosition() { return shape.getPosition(); }

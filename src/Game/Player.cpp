@@ -130,7 +130,7 @@ void Player::update(EntityNode *platforms, float dt)
     checkCollisionWithPlatforms(platforms);
     gravity();
     windowsCollision();
-    std::cout << "Vida del carajito: " << live << std::endl;
+    //std::cout << "Vida del carajito: " << live << std::endl;
     checkIfCarajitoVive();
     // Animacion
     // std::cout<<"\nEje X:"<<this->animation->uvRect.width;
@@ -318,4 +318,25 @@ void Player::checkIfCarajitoVive()
 {
     if (live <= 0)
         isAlive = false;
+}
+
+void Player::checkCollisionWithCoins(EntityNode *coins, Score *points)
+{
+    EntityNode *head = coins;
+    while (head)
+    {
+        if (shape.getGlobalBounds().intersects(head->value.getShape().getGlobalBounds()))
+        {
+            head->value.moveCoin();
+            if(live>75) live=100;
+            else live+=25;
+            //points->mostrarScore();
+            std::cout << "COge monedita fiummmm" << std::endl;
+            points->coinScore();
+            return;
+        }
+        // shape.setFillColor(sf::Color::Green);
+       // shape.setFillColor(sf::Color::White);
+        head = head->next_node;
+    }
 }

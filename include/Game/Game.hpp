@@ -10,6 +10,7 @@
 #include "DataStructures/EntityNode.hpp"
 #include "GameTextures.hpp"
 #include "GameOver.hpp"
+#include "Score.hpp"
 /*Game engine class*/
 
 class Game
@@ -32,9 +33,9 @@ private:
     // Game objects
     Player player;
     EnemyManager enemy;
-    Platform ground;
     Bullets bulletList;
     Maps map;
+    Score points;
     // Private functions
     void initVariables();
     void initWindow();

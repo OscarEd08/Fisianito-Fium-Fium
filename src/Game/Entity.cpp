@@ -62,6 +62,11 @@ void Entity::moveEntity(float x_movement, float y_movement)
     updateCords();
 }
 
+//move coin
+void Entity::moveCoin() {
+    shape.move(5000, 3);
+}
+
 void Entity::renderOnGame(sf::RenderTarget *target)
 {
     target->draw(this->shape);

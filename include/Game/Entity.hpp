@@ -59,4 +59,6 @@ public:
     sf::RectangleShape getShape();
     const sf::FloatRect getBounds() const;
     void logEntity();
+    //Coin
+    void moveCoin();
 };
