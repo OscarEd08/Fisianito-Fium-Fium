@@ -4,19 +4,18 @@
 
 int main()
 {
-    sf::RenderWindow window1(sf::VideoMode(1280,720),"AAA MENU");
-    Menu menuPrincipal(1280,720);
     Game game;
+    Menu menuPrincipal(game.window->getSize().x,game.window->getSize().y);
     //Variables de tiempo para la animación
     sf::Clock clock;
    
     clock.restart();
 
     //MENU FALTA UNIRLO CON GAME
-    while (window1.isOpen())
+    while (game.window->isOpen())
     {
         sf::Event event;
-        while (window1.pollEvent(event))
+        while (game.window->pollEvent(event))
         {
             switch(event.type)
             {
@@ -34,41 +33,36 @@ int main()
                                 case 0:
                                     //Empieza a jugar
                                     std::cout<<"\nInicio Juego";
-                                    window1.close(); break;
+                                      // Game loo
+                                    while (game.running())
+                                        {
+                                            // Update
+                                            game.update(clock.getElapsedTime().asMicroseconds());
+                                            // Render
+                                            game.render();
+                                            //Restart clock
+                                            clock.restart();
+                                        } break;
 
                                 case 1:
-                                    //Empieza a jugar
+                                    //Ver puntuaciones
                                     std::cout<<"\nAbrir Puntuaciones";
-                                    window1.clear(sf::Color::Black);break;
+                                    game.window->clear(sf::Color::Black);break;
 
                                 case 2:
-                                    //Empieza a jugar
+                                    //Salir
                                     std::cout<<"\nSalir";
-                                    window1.close();
+                                    game.window->close();
                                     
                             }
                     }break;
-
-                case sf::Event::Closed:
-                    window1.close(); break;
             }
         }
 
-        window1.clear(sf::Color::Black);
-        menuPrincipal.draw(window1);
-        window1.display();
+        game.window->clear(sf::Color::Black);
+        menuPrincipal.draw(*game.window);
+        game.window->display();
     }
-    // Game loop
-    if(menuPrincipal.selectedOption()!=2){
-    while (game.running())
-    {
-        // Update
-        game.update(clock.getElapsedTime().asMicroseconds());
-        // Render
-        game.render();
-        //Restart clock
-        clock.restart();
-    }
-    }
+  
     return 0;
 }

@@ -10,7 +10,6 @@ class Game
 private:
     // Variables
     // Window
-    sf::RenderWindow *window;
     sf::VideoMode videoMode;
     sf::Event ev;
     // View
@@ -38,6 +37,7 @@ public:
 
     // Access
     const bool running() const;
+    sf::RenderWindow *window;
 
     // Functions
     void pollEvents();
