@@ -1,7 +1,5 @@
 #include "Game/Score.hpp"
 
-#include"Game/Score.hpp"
-
 Score::Score(){
 	initVariables();
 }

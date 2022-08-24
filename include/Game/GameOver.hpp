@@ -22,25 +22,19 @@ private:
 
     //Text on screen
     GameFonts font;
-    sf::Text gameOverTitle;
-    sf::Text retryButton;
-    sf::Text exitButton;
+    sf::Text gameOverButton[3];
 
-    //Buttons
-    bool isRetryButtonSelected;
-    //bool isRetryButtonPressed;
-
-    bool isExitButtonSelected;
-    bool isExitButtonPressed;
+    int gameOverMenuSelected;
 
 private:
     void updateInput();
 
 public:
     void initVariables();
+    void moveUp();
+    void moveDown();
+    int getPressedButton(){return gameOverMenuSelected;}
     void updateScore(Score score);
-    void update(sf::RenderWindow *window);
+    void KeyboardReleased(sf::Event ev, sf::RenderWindow *window);
     void renderBackground(sf::RenderTarget *target);
-
-
 };

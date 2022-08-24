@@ -67,7 +67,8 @@ void Game::pollEvents()
             break;
 
         case sf::Event::KeyReleased:
-        {
+        {   
+            gameOver.KeyboardReleased(ev,this->window);
             if (ev.key.code == sf::Keyboard::F)
                 bulletList.shotBullet(player);
             else
@@ -105,7 +106,6 @@ void Game::update(float dt)
     else{
         //Lose
         if(!gameOver.isRetryButtonPressed){
-            gameOver.update(this->window);
             gameOver.updateScore(score);
             score.finalScore();
             endGame = true;
