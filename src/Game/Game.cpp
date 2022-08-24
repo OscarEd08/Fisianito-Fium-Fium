@@ -115,6 +115,8 @@ void Game::update(float dt)
             endGame = false;
             player.resetPlayer();
             score.resetScore();
+            enemy.resetEnemies();
+            map.resetHears();
             gameOver.isRetryButtonPressed = false;
         }
     

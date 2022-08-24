@@ -62,4 +62,5 @@ public:
     void renderPlatforms(sf::RenderTarget *target);
     void initHearts();
     void renderHearts(sf::RenderTarget *target);
+    void resetHears();
 };

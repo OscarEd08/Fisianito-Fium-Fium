@@ -28,6 +28,7 @@ private:
 
 public:
     GameTextures texture;
+    void resetEnemies();
     void checkCollisionWithPlayer(Player &player);
     void initEnemies();
     void updateManager(BulletNode *bullets);

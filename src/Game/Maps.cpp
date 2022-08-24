@@ -216,3 +216,7 @@ void Maps::renderHearts(sf::RenderTarget *target)
         head = head->next_node;
     }
 }
+
+void Maps::resetHears(){
+    initHearts();
+}
