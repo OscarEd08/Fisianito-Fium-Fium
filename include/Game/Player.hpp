@@ -2,7 +2,6 @@
 
 #include <SFML/Graphics.hpp>
 #include "Animation.hpp"
-#include "Collision.hpp"
 #include "GameTextures.hpp"
 #include "Entity.hpp"
 #include "DataStructures/EntityNode.hpp"
