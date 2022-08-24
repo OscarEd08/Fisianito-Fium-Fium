@@ -9,7 +9,6 @@ int main()
     //Variables de tiempo para la animación
     sf::Clock clock;
    
-    clock.restart();
 
     //MENU FALTA UNIRLO CON GAME
     while (game.window->isOpen())
@@ -33,9 +32,10 @@ int main()
                                 case 0:
                                     //Empieza a jugar
                                     std::cout<<"\nInicio Juego";
-                                      // Game loo
+                                    // Game loop
                                     while (game.running())
                                         {
+                                            clock.restart();
                                             // Update
                                             game.update(clock.getElapsedTime().asMicroseconds());
                                             // Render
