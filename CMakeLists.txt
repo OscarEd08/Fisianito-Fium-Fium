@@ -27,6 +27,7 @@ add_executable(fisianito
   include/GameTextures.hpp
   include/Platform.hpp
   include/Player.hpp
+  include/Menu.hpp
   src/Animation.cpp
   src/Collision.cpp
   src/Entity.cpp
@@ -35,6 +36,7 @@ add_executable(fisianito
   src/main.cpp
   src/Platform.cpp
   src/Player.cpp
+  src/Menu.cpp
 )
 
 target_link_libraries(fisianito sfml-graphics sfml-audio)
