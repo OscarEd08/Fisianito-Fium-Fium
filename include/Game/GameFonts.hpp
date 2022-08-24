@@ -9,5 +9,6 @@ public:
 
     sf::Font font_gameOver;
     sf::Font font_score;
+    sf::Font font_menu;
     
 };
