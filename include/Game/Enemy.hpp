@@ -1,10 +1,7 @@
-
-
 #pragma once
 
 #include <SFML/Graphics.hpp>
 #include "Animation.hpp"
-#include "Collision.hpp"
 #include "Entity.hpp"
 #include "DataStructures/EntityNode.hpp"
 #include "DataStructures/BulletNode.hpp"

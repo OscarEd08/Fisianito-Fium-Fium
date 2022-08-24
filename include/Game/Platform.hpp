@@ -2,7 +2,6 @@
 
 #include <SFML/Graphics.hpp>
 #include "Entity.hpp"
-#include "Collision.hpp"
 
 class Platform : public Entity
 {
@@ -20,6 +19,4 @@ public:
     void movePlatform();
     void update();
 
-    // Collision functions
-    Collision getCollision() { return Collision(shape); }
 };

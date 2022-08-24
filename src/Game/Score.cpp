@@ -1,7 +1,5 @@
 #include "Game/Score.hpp"
 
-#include"Game/Score.hpp"
-
 Score::Score(){
 	initVariables();
 }
@@ -14,7 +12,6 @@ void Score::initVariables(){
 
 void Score::enemyScore(){
     score+=5;
-    std::cout<<score<<std::endl;
 }
 
 void Score::resetScore(){

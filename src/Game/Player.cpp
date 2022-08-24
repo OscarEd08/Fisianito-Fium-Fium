@@ -201,11 +201,9 @@ void Player::checkCollisionWithObjects(EntityNode *objects)
         if (shape.getGlobalBounds().intersects(head->value.getShape().getGlobalBounds()))
         {
             shape.setFillColor(sf::Color::Red);
-            std::cout << "muere" << std::endl;
             live -= 1;
             return;
         }
-        // shape.setFillColor(sf::Color::Green);
         shape.setFillColor(sf::Color::White);
         head = head->next_node;
     }

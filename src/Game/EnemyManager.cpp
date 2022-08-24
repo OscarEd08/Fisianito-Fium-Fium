@@ -12,6 +12,10 @@ void EnemyManager::initVariables()
     maxEnemies = 50;
 }
 
+void EnemyManager::resetEnemies(){
+    enemies.clear();
+}
+
 void EnemyManager::updateManager(BulletNode *bullets)
 {
 
@@ -59,13 +63,11 @@ void EnemyManager::removeDeadEnemies(Score *hearts)
     {
         if (!enemies[i].isAlive)
         {
-            std::cout << "balaceao" << std::endl;
             indexToRemove.push_back(i);
         }
     }
     for (int index : indexToRemove)
     {
-        std::cout << "Borrando enemigo" << std::endl;
         enemies.erase(enemies.begin() + index);
         hearts->enemyScore();
     }
@@ -74,8 +76,6 @@ void EnemyManager::removeDeadEnemies(Score *hearts)
 void EnemyManager::checkCollisionWithPlayer(Player &player){
     for(int i=0; i<enemies.size(); i++){
         if(player.getBounds().intersects(enemies[i].getBounds())){
-            //player.getShape().setFillColor(sf::Color::Red);
-            std::cout<<"me tan balaceando"<<std::endl;
             player.live -=1;
             player.isCollideWithEnemy = true;
             return;

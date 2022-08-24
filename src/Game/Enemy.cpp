@@ -6,9 +6,6 @@ Enemy::Enemy()
     isSpawn = true;
     live = 30;
     isAlive = true;
-
-    // this->initVariables();
-    // this->initEnemy();
 }
 
 Enemy::~Enemy() {}
@@ -105,10 +102,8 @@ void Enemy::checkImpactWithBullets(BulletNode *bullets)
     {
         if (shape.getGlobalBounds().intersects(head->value.getShape().getGlobalBounds()))
         {
-            std::cout << "Balaceado por los municipales" << std::endl;
             head->value.hasCollide = true;
             live -= head->value.damage;
-            std::cout << "Live of enemy: " << live << std::endl;
             checkIfIsAlive();
         }
         head = head->next_node;

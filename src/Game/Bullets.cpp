@@ -58,7 +58,6 @@ void Bullets::updateBullets()
         head = head->next_node;
         cont++;
     }
-    // std::cout << "Number of bullets: " << cont << std::endl;
     deleteBulletsFromList();
 }
 
