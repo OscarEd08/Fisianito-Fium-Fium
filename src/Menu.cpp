@@ -23,6 +23,27 @@ Menu::Menu(float width, float height)
     menu[2].setPosition(sf::Vector2f(width*0.27,0.83*height));
     
     selectedIndex=0;
+
+    //Naming Screen
+    nameEntered=false;
+
+    namePlayer[0].setFont(textures.menuFont);
+    namePlayer[0].setString("Ingrese Nombre");
+    namePlayer[0].setCharacterSize(50);
+    namePlayer[0].setFillColor(sf::Color::White);
+    namePlayer[0].setPosition(sf::Vector2f(width/3,height/4));
+
+    namePlayer[1].setFont(textures.menuFont);
+    namePlayer[1].setCharacterSize(45);
+    namePlayer[1].setFillColor(sf::Color::Black);
+    namePlayer[1].setPosition(sf::Vector2f(width/3.2,2*height/4));
+
+    nameRectangle.setSize(sf::Vector2f(width-2*width/1.4,50));
+    nameRectangle.setFillColor(sf::Color::White);
+    nameRectangle.setPosition(sf::Vector2f(width/1.4,2*height/4));
+
+
+
 }
 
 Menu::~Menu(){
@@ -37,6 +58,16 @@ void Menu::draw(sf::RenderWindow &window)
     {
         
         window.draw(menu[i]);
+    }
+}
+
+void Menu::makingTextField(sf::RenderWindow &window){
+    namePlayer[1].setString(namePlayerString);
+    window.draw(nameRectangle);
+
+    for(int i=0;i<2;i++)
+    {
+        window.draw(namePlayer[i]);
     }
 }
 

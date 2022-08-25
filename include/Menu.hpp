@@ -11,11 +11,18 @@ class Menu
         ~Menu();
 
         void draw(sf::RenderWindow &window);
+        void makingTextField(sf::RenderWindow &window);
         //Subir y Bajar Opcion Seleccionada
         void MoveUp();
         void MoveDown();
         //Presionar
         int selectedOption(){return selectedIndex;}
+        
+        //Text Name
+        std::string namePlayerString="AAA";
+        sf::Text namePlayer[2];
+        sf::RectangleShape nameRectangle;
+        bool nameEntered;
 
         sf::Sprite menuBg;
     

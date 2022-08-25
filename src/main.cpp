@@ -30,8 +30,30 @@ int main()
                             switch(menuPrincipal.selectedOption())
                             {
                                 case 0:
-                                    //Empieza a jugar
+                                    //Pedir Nombre
+                                    while(!menuPrincipal.nameEntered){
+                                    
+                                    for (sf::Event eventName; game.window->pollEvent(eventName);){
+
+                                        if(eventName.type == sf::Event::TextEntered){
+                                            if (eventName.text.unicode == 8){   // BORRAR
+                                                menuPrincipal.namePlayerString =menuPrincipal.namePlayerString.substr(0, menuPrincipal.namePlayerString.size() - 1);
+                                            }
+                                            else menuPrincipal.namePlayerString += eventName.text.unicode;
+                                        }
+
+                                        if(eventName.type == sf::Event::KeyReleased){
+                                            if (eventName.key.code == sf::Keyboard::Enter) menuPrincipal.nameEntered=true;
+                                        }
+
+                                        game.window->clear(sf::Color::Black);
+                                        menuPrincipal.makingTextField(*game.window);
+                                        game.window->display();
+                                        }
+                                    }
+                                    
                                     std::cout<<"\nInicio Juego";
+                                    std::cout<<"\nNOMBRE "<<menuPrincipal.namePlayerString;
                                     // Game loop
                                     while (game.running())
                                         {
