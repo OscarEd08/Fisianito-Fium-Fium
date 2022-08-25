@@ -61,7 +61,7 @@ int main()
 
                                 case 2:
                                     //Salir
-                                    std::cout<<"\nSalir";
+                                    std::cout<<"\nSalir Juego"<<std::endl;
                                     game.window->close();
                                     
                             }

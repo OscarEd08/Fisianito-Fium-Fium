@@ -71,6 +71,7 @@ void GameOver::KeyboardReleased(sf::Event ev, sf::RenderWindow *window){
                     isRetryButtonPressed = true;
                     break;
                 case 2:
+                    std::cout<<"\nSalir Juego"<<std::endl;
                     window->close();
                     break;  
             }
