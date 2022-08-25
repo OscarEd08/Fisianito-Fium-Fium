@@ -41,7 +41,7 @@ int main()
                             {
                                 case 0:
                                     //Empieza a jugar
-                                    std::cout<<"\nInicio Juego";
+                                    std::cout<<"\nInicio Juego"<<std::endl;
                                     // Game loop
                                     while (game.running())
                                     {
