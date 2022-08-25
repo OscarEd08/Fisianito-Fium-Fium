@@ -101,3 +101,16 @@ void Score::selection(){
 			actual = actual->sgte;
 		}
 }
+
+void Score::showScore(){
+	readScore();
+    selection();
+    int i=0;
+	std::cout<<"*****TOTAL SCORES*****"<<std::endl;
+    while(points != NULL){
+        std::cout<<" "<<i+1<<") "<<points->nro<<std::endl;
+        points=points->sgte;
+        i++;
+    }
+	std::cout<<"*********************"<<std::endl;
+}

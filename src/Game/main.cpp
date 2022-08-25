@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include "Game/Game.hpp"
 #include "Game/Menu.hpp"
+#include "Game/Score.hpp"
 #include <stdlib.h>
 #include <time.h>
 
@@ -55,7 +56,7 @@ int main()
 
                                 case 1:
                                     //Ver puntuaciones
-                                    std::cout<<"\nAbrir Puntuaciones";
+                                    Score().showScore();
                                     game.window->clear(sf::Color::Black);break;
 
                                 case 2:
@@ -65,6 +66,9 @@ int main()
                                     
                             }
                     }   break;
+                case sf::Event::Closed:
+                    game.window->close();
+                break;
             }
         }    
         game.window->clear(sf::Color::Black);

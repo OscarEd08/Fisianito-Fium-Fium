@@ -37,4 +37,5 @@ public:
 	void readScore();//lee scores anterioresS
 	void saveScore();//guarda los puntajes
 	void selection();//orderamiento por selección
+	void showScore();
 };

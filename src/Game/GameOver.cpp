@@ -65,7 +65,7 @@ void GameOver::KeyboardReleased(sf::Event ev, sf::RenderWindow *window){
         case sf::Keyboard::Enter:
             switch (getPressedButton()){
                 case 0:
-                    std::cout<<"Score"<<std::endl;
+                    Score().showScore();
                     break;
                 case 1:
                     isRetryButtonPressed = true;
