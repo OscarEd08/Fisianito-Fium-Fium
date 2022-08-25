@@ -7,7 +7,7 @@ EnemyManager::EnemyManager()
 
 void EnemyManager::initVariables()
 {
-    spawnTimerMax = 500.0f;
+    spawnTimerMax = 200.0f;
     spawnTimer = spawnTimerMax;
     maxEnemies = 50;
 }

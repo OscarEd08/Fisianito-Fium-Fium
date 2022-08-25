@@ -12,50 +12,64 @@ int main()
     // Init Game
     srand(time(NULL));
     Game game;
-    Menu menuPrincipal(1280,720);
-    sf::RenderWindow *windowMenu = new sf::RenderWindow(sf::VideoMode(1280,720),"AAA MENU");
+    Menu menuPrincipal(game.window->getSize().x,game.window->getSize().y);
     sf::Clock clock;
+
     float accumulator = 0;
     const float timestep = 1.0f / 60.0f; // 60hz update frequency
     srand(time(NULL));
 
     //MENU FALTA UNIRLO CON GAME
-    while (windowMenu->isOpen())
+    while (game.window->isOpen())
     {
         sf::Event event;
-        while (windowMenu->pollEvent(event))
+        while (game.window->pollEvent(event))
         {
             switch(event.type)
             {
                 case sf::Event::KeyReleased:
-                    menuPrincipal.KeyboardReleased(event,windowMenu);
-                    break;
+                    switch(event.key.code)
+                    {
+                        case sf::Keyboard::Up:
+                                menuPrincipal.MoveUp();break;
+                        case sf::Keyboard::Down:
+                            menuPrincipal.MoveDown();break;
 
-                case sf::Event::Closed:
-                    windowMenu->close(); break;
+                        case sf::Keyboard::Return:
+                            switch(menuPrincipal.selectedOption())
+                            {
+                                case 0:
+                                    //Empieza a jugar
+                                    std::cout<<"\nInicio Juego";
+                                    // Game loop
+                                    while (game.running())
+                                    {
+                                            clock.restart();
+                                            // Update
+                                            game.update(clock.getElapsedTime().asMicroseconds());
+                                            // Render
+                                            game.render();
+                                            //Restart clock
+                                            clock.restart();
+                                    } break;
+
+                                case 1:
+                                    //Ver puntuaciones
+                                    std::cout<<"\nAbrir Puntuaciones";
+                                    game.window->clear(sf::Color::Black);break;
+
+                                case 2:
+                                    //Salir
+                                    std::cout<<"\nSalir";
+                                    game.window->close();
+                                    
+                            }
+                    }   break;
             }
-        }
-
-        windowMenu->clear(sf::Color::Black);
-        menuPrincipal.draw(*windowMenu);
-        windowMenu->display();
-    }
-
-    if(menuPrincipal.selectedOption()!=2){
-        // Game loop
-        while (game.running())
-        {
-            // Update
-            accumulator += clock.restart().asSeconds();
-            while (accumulator >= timestep)
-            {
-                accumulator -= timestep;
-                game.update(clock.getElapsedTime().asMicroseconds());
-            }
-
-            // Render
-            game.render();
-        }
+        }    
+        game.window->clear(sf::Color::Black);
+        menuPrincipal.draw(*game.window);
+        game.window->display();
     }
 
     return 0;

@@ -18,7 +18,6 @@ class Game
 private:
     // Variables
     // Window
-    sf::RenderWindow *window;
     sf::VideoMode videoMode;
     sf::Event ev;
     // View
@@ -44,6 +43,9 @@ public:
     // Constructor-Destructor
     Game();
     virtual ~Game();
+    
+    //Window
+    sf::RenderWindow *window;
 
     // Access
     bool running();

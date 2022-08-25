@@ -18,7 +18,6 @@ class Menu
         void MoveDown();
         //Presionar
         int selectedOption(){return selectedIndex;}
-        void KeyboardReleased(sf::Event ev, sf::RenderWindow *window);
 
         sf::Sprite menuBg;
     

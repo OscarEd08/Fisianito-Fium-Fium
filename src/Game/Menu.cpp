@@ -59,32 +59,3 @@ void Menu::MoveDown()
         menu[selectedIndex].setFillColor(sf::Color::Yellow);
     }
 }
-
-void Menu::KeyboardReleased(sf::Event ev, sf::RenderWindow *window){
-    switch (ev.key.code){
-        case sf::Keyboard::Up:
-            MoveUp();
-            break;                
-        case sf::Keyboard::Down:
-            MoveDown();
-            break;
-        case sf::Keyboard::Enter:
-            switch (selectedOption()){
-                case 0:
-                    //Empieza a jugar
-                    std::cout<<"\nInicio Juego";
-                    window->close(); break;
-
-                case 1:
-                    //Empieza a jugar
-                    std::cout<<"\nAbrir Puntuaciones";
-                    window->clear(sf::Color::Black);break;
-
-                case 2:
-                    //Empieza a jugar
-                    std::cout<<"\nSalir";
-                    window->close();  
-            }
-            break;            
-    }
-}

@@ -51,7 +51,7 @@ void Player::resetPlayer(){
 void Player::initObjects()
 {
     // Animacion general inicio
-    this->animation = new Animation(getWitdh(), getHeight(), 4, 3);
+    this->animation = new Animation(getWitdh(), getHeight(), 4, 1);
     shape.setTextureRect(this->animation->uvRect);
 
     // creando ciclos de animacion
