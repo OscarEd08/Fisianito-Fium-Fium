@@ -42,10 +42,11 @@ void Player::initPlayer()
     this->shape.setTexture(&texture.playerTexture);
 }
 
-void Player::resetPlayer(){
+void Player::resetPlayer()
+{
     isAlive = true;
     live = 100;
-    shape.setPosition(20,groundHeight);
+    shape.setPosition(20, groundHeight);
 }
 
 void Player::initObjects()
@@ -155,7 +156,6 @@ void Player::windowsCollision()
         shape.setPosition(1280.0f - shape.getGlobalBounds().width, shape.getPosition().y);
 }
 
-
 void Player::checkCollisionWithPlatforms(EntityNode *platforms)
 {
     EntityNode *head = platforms;
@@ -177,7 +177,7 @@ void Player::checkCollisionWithPlatforms(EntityNode *platforms)
         case CollisionDirection::Bottom:
         {
 
-            accelerationY *= 1.0f;
+            accelerationY *= 2.0f;
             isJumping = false;
             movementDirection = Directions::Down;
             return;
@@ -209,8 +209,10 @@ void Player::checkCollisionWithObjects(EntityNode *objects)
     }
 }
 
-void Player::changeColorWhenCollideWithEnemy(){
-    if(isCollideWithEnemy){
+void Player::changeColorWhenCollideWithEnemy()
+{
+    if (isCollideWithEnemy)
+    {
         shape.setFillColor(sf::Color::Red);
     }
 }
@@ -327,10 +329,12 @@ void Player::checkCollisionWithHearts(EntityNode *hearts, Score *points)
     while (head)
     {
         if (shape.getGlobalBounds().intersects(head->value.getShape().getGlobalBounds()))
-        {   
+        {
             head->value.moveCoin();
-            if(live>75) live=100;
-            else live+=25;
+            if (live > 75)
+                live = 100;
+            else
+                live += 25;
             return;
         }
         head = head->next_node;

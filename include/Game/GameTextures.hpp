@@ -12,6 +12,7 @@ public:
     sf::Texture bulletTexture;
     sf::Texture ghostTexture;
     sf::Texture bgTexture;
+    sf::Texture bgScores;
     sf::Texture gameOverTexture;
     sf::Texture heartTexture;
     sf::Texture lifeBarTexture;

@@ -1,7 +1,7 @@
 #include "Game/Game.hpp"
 #include <iostream>
 // Constructor-Destructor
-Game::Game() 
+Game::Game()
 {
     initVariables();
     initEntitys();
@@ -67,8 +67,8 @@ void Game::pollEvents()
             break;
 
         case sf::Event::KeyReleased:
-        {   
-            gameOver.KeyboardReleased(ev,this->window);
+        {
+            gameOver.KeyboardReleased(ev, this->window);
             if (ev.key.code == sf::Keyboard::F)
                 bulletList.shotBullet(player);
             else
@@ -81,20 +81,20 @@ void Game::pollEvents()
 }
 
 void Game::update(float dt)
-{   
+{
     pollEvents();
-    //Update player
+    // Update player
     if (player.isAlive)
     {
-        //Collision with platforms
+        // Collision with platforms
         player.update(map.platforms, dt);
-        //Collision with traps
+        // Collision with traps
         player.checkCollisionWithObjects(map.objects);
-        //Collision with enemies
+        // Collision with enemies
         enemy.checkCollisionWithPlayer(player);
         player.changeColorWhenCollideWithEnemy();
-        player.checkCollisionWithHearts(map.hearts,&score);
-        //Enemy & Bullets update
+        player.checkCollisionWithHearts(map.hearts, &score);
+        // Enemy & Bullets update
         bulletList.updateBullets();
         enemy.initEnemies();
         enemy.updateManager(bulletList.bulletsList);
@@ -102,16 +102,20 @@ void Game::update(float dt)
         map.updateLifeBar(player);
         map.updateTextScore(score);
     }
-    //Playes is not alived
-    else{
-        //Lose
-        if(!gameOver.isRetryButtonPressed){
+    // Playes is not alived
+    else
+    {
+        // Lose
+        if (!gameOver.isRetryButtonPressed)
+        {
             gameOver.updateScore(score);
+            score.setPlayerName(playerName);
             score.finalScore();
             endGame = true;
         }
-        //Retry
-        else{
+        // Retry
+        else
+        {
             endGame = false;
             player.resetPlayer();
             score.resetScore();
@@ -119,14 +123,22 @@ void Game::update(float dt)
             map.resetHears();
             gameOver.isRetryButtonPressed = false;
         }
-    
     }
 }
 
+void Game::setPlayerName(std::string name)
+{
+    if (!name.empty() && name[name.length() - 1] == '\n')
+    {
+        name.erase(name.length() - 1);
+    }
+    playerName = name;
+}
 void Game::render()
 {
     window->clear();
-    if(!endGame){
+    if (!endGame)
+    {
         //   Draw game objects
         map.renderBackground(this->window);
         map.renderPlatforms(this->window);
@@ -142,7 +154,8 @@ void Game::render()
         enemy.renderEnemies(this->window);
     }
     // Draw GameOver Screen
-    else{
+    else
+    {
         gameOver.renderBackground(this->window);
     }
 

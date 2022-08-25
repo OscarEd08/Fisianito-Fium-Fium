@@ -11,6 +11,7 @@
 #include "GameTextures.hpp"
 #include "GameOver.hpp"
 #include "Score.hpp"
+#include <string>
 /*Game engine class*/
 
 class Game
@@ -25,26 +26,26 @@ private:
     // Time
     float deltaTime;
     sf::Clock clock;
-    //Game Over variables
+    // Game Over variables
     GameOver gameOver;
-
+    std::string playerName;
     // Game objects
     Player player;
     EnemyManager enemy;
     Bullets bulletList;
     Maps map;
-    Score score;
     // Private functions
     void initVariables();
     void initWindow();
     void initEntitys();
 
 public:
+    Score score;
     // Constructor-Destructor
     Game();
     virtual ~Game();
-    
-    //Window
+    void setPlayerName(std::string name);
+    // Window
     sf::RenderWindow *window;
 
     // Access

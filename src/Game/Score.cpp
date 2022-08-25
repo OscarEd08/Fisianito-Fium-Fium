@@ -1,116 +1,158 @@
 #include "Game/Score.hpp"
+Score::Score()
+{
 
-Score::Score(){
 	initVariables();
 }
 
-void Score::initVariables(){
+void Score::initVariables()
+{
 	score = 0;
 	guardado = false;
-	points=NULL;
+	points = NULL;
 }
 
-void Score::enemyScore(){
-    score+=5;
+void Score::enemyScore()
+{
+	score += 5;
 }
 
-void Score::resetScore(){
+void Score::resetScore()
+{
 	score = 0;
 	guardado = false;
 }
 
-void Score::finalScore(){
-    
-    if(guardado==false){
-        readScore();
-        selection();
-        saveScore();
-        guardado=true;
-        
-    }    
+void Score::finalScore()
+{
+
+	if (guardado == false)
+	{
+		saveScore();
+		guardado = true;
+	}
 }
 
-int Score::getScore(){
+int Score::getScore()
+{
 	return this->score;
 }
 
-TpList Score::initNodo(int num){
-    TpList nuevo = NULL;
-	nuevo = new(struct nodo);
-	nuevo->nro = num;
-	nuevo->sgte = NULL;
+ScoreRecordNode *Score::createNode(std::string playerName, int num)
+{
+	ScoreRecordNode *nuevo = new ScoreRecordNode();
+	nuevo->playerName = playerName;
+	nuevo->score = num;
 	return nuevo;
 }
-void Score::insertScore(int num){
-    TpList q = initNodo(num);
-	if ( points!= NULL)
-		q->sgte = points;
-	points = q;
-}
-void Score::readScore(){    
-    std::string line;
-    std::ifstream text("records.txt");
-    int num;
-    insertScore(score);
-	if (text.fail()) {
+void Score::insertScore(ScoreRecordNode *node)
+{
+	if (!points)
+	{
+		points = node;
 		return;
 	}
-	while (!text.eof()){
-		std::getline(text, line);
-        if(line=="")
-            break;
-        std::from_chars(line.c_str(),line.c_str()+line.length(),num);
-        insertScore(num);
-	}
-	text.close();
+	ScoreRecordNode *head = points;
+	while (head->next_node)
+		head = head->next_node;
+	head->next_node = node;
 }
 
-void Score::saveScore(){
-    std::ofstream text;
-	text.open("records.txt", std::ios::out);
-	while (points != NULL) {
-		text << points->nro<<std::endl;
-		points = points->sgte;
+void Score::readScore()
+{
+	auto scoreTable = db.retrieveScores();
+	for (const auto &row : scoreTable)
+	{
+		std::string playerName = row["playername"].as<std::string>();
+		int score = row["score"].as<int>();
+		insertScore(createNode(playerName, score));
 	}
-	text.close();
 }
-void Score::selection(){
-    	TpList actual, siguiente;   int t;
-		actual = points; int minimo;
-		TpList min = points;
 
-		while (actual->sgte != NULL) {
-			minimo = actual->nro;
-			min = actual;
-			siguiente = actual->sgte;
+void Score::setPlayerName(std::string name)
+{
+	playerName = name;
+}
+void Score::saveScore()
+{
+	db.recordScore(playerName, score);
+}
 
-			while (siguiente != NULL) {
+void Score::orderScoreList()
+{
+}
+void Score::selection()
+{
+	ScoreRecordNode *actual;
+	ScoreRecordNode *siguiente;
+	int tempScore;
+	std::string tempName;
+	actual = points;
+	int minimo;
+	ScoreRecordNode *min = points;
 
-				if (siguiente->nro > minimo) {
-					minimo = siguiente->nro;
-					min = siguiente;
-				}
+	while (actual->next_node != NULL)
+	{
+		minimo = actual->score;
+		min = actual;
+		siguiente = actual->next_node;
 
-				siguiente = siguiente->sgte;
+		while (siguiente != NULL)
+		{
+
+			if (siguiente->score > minimo)
+			{
+				minimo = siguiente->score;
+				min = siguiente;
 			}
 
-			t = actual->nro;
-			actual->nro = min->nro;
-			min->nro = t;
-
-			actual = actual->sgte;
+			siguiente = siguiente->next_node;
 		}
+
+		tempScore = actual->score;
+		tempName = actual->playerName;
+		actual->score = min->score;
+		actual->playerName = min->playerName;
+		min->score = tempScore;
+		min->playerName = tempName;
+		actual = actual->next_node;
+	}
 }
 
-void Score::showScore(){
-	readScore();
-    selection();
-    int i=0;
-	std::cout<<"*****TOTAL SCORES*****"<<std::endl;
-    while(points != NULL){
-        std::cout<<" "<<i+1<<") "<<points->nro<<std::endl;
-        points=points->sgte;
-        i++;
-    }
-	std::cout<<"*********************"<<std::endl;
+void Score::displayScoreWindow()
+{
+	scoreWindow.renderBackground();
+}
+
+void Score::windowLogic()
+{
+	// Ver puntuaciones
+	scoreWindow.initVariables();
+	sf::VideoMode videoMode;
+	videoMode.width = 1280;
+	videoMode.height = 720;
+	scoreWindow.window = new sf::RenderWindow(videoMode, "Scores");
+	do
+	{
+		while (scoreWindow.window->pollEvent(scoreWindow.scoreEV))
+		{
+			switch (scoreWindow.scoreEV.type)
+			{
+			case sf::Event::Closed:
+				scoreWindow.window->close();
+				break;
+			case sf::Event::KeyPressed:
+			{
+
+				if (scoreWindow.scoreEV.key.code == sf::Keyboard::Escape)
+				{
+
+					scoreWindow.window->close();
+					break;
+				}
+			}
+			}
+		}
+		displayScoreWindow();
+	} while (scoreWindow.window->isOpen());
 }
